@@ -6,6 +6,7 @@ import Toolbar from './Toolbar';
 import Template from './Template';
 import TemplateList from './TemplateList';
 import FXSpot from './FXSpotList';
+import PreviewDetails from './PreviewDetails';
 import data from './data';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +27,7 @@ const PricingListView = () => {
       <Container maxWidth={false}>
         <Grid container spacing={2}>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
-            <Template />
+            <PreviewDetails />
           </Grid>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
             <TemplateList />
@@ -34,9 +35,9 @@ const PricingListView = () => {
         </Grid>
 
         <Grid container spacing={2}>
-          {/* <Grid item lg={6} sm={6} xl={6} xs={12}>
+          <Grid item lg={6} sm={6} xl={6} xs={12}>
             <Template />
-          </Grid> */}
+          </Grid>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
             <FXSpot />
           </Grid>

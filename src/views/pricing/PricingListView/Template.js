@@ -222,7 +222,7 @@ const Template = ({ className, ...rest }) => {
                 color="primary"
                 variant="contained"
               >
-                Save details
+                Create
               </Button>
               <br />
               <Button

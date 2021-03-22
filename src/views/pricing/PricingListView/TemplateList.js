@@ -69,8 +69,8 @@ const TemplateList = ({ className, ...rest }) => {
               color="secondary"
               onClick={() => {
                 alert('Hide');
-                this.setState({ hidingOn: false });
-                this.useState.hidingOn ? alert('Show') : alert('Hide');
+                // this.setState({ hidingOn: false });
+                // this.useState.hidingOn ? alert('Show') : alert('Hide');
               }}
             >
               <VisibilityOffIcon />
