@@ -7,6 +7,8 @@ import Template from './Template';
 import TemplateList from './TemplateList';
 import FXSpot from './FXSpotList';
 import PreviewDetails from './PreviewDetails';
+import BucketList from './BucketList';
+import LatestOrders from './LatestOrders';
 import data from './data';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,10 +29,10 @@ const PricingListView = () => {
       <Container maxWidth={false}>
         <Grid container spacing={2}>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
-            <PreviewDetails />
+            <BucketList />
           </Grid>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
-            <TemplateList />
+            {/* <FXSpot /> */}
           </Grid>
         </Grid>
 
@@ -39,13 +41,29 @@ const PricingListView = () => {
             <Template />
           </Grid>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
+            <TemplateList />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid item lg={6} sm={6} xl={6} xs={12}>
+            <PreviewDetails />
+          </Grid>
+          <Grid item lg={6} sm={6} xl={6} xs={12}>
             <FXSpot />
           </Grid>
         </Grid>
-        <Toolbar />
+
+        <Grid container spacing={2}>
+          <Grid item lg={12} md={12} xl={12} xs={12}>
+            <LatestOrders />
+          </Grid>
+        </Grid>
+
+        {/* <Toolbar />
         <Box mt={3}>
           <Results customers={customers} />
-        </Box>
+        </Box> */}
       </Container>
     </Page>
   );

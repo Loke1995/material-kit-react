@@ -13,8 +13,10 @@ import {
   CardHeader,
   Divider,
   Grid,
-  Typography
+  Typography,
+  ButtonBase
 } from '@material-ui/core';
+import { Container, Row, Col } from 'reactstrap';
 import { Search as SearchIcon } from 'react-feather';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -25,12 +27,47 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    display: 'flex'
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  content: {
+    flex: '1 0 auto'
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(1)
+  },
   importButton: {
     marginRight: theme.spacing(1)
   },
   exportButton: {
     marginRight: theme.spacing(1)
+  },
+  paper: {
+    paddingTop: 'auto',
+    margin: 'auto',
+    width: '100%',
+    padding: '0 1rem 1rem 1rem'
+  },
+  right: {
+    textAlign: 'right'
+  },
+  left: {
+    textAlign: 'left'
+  },
+  priceFormat: {
+    textAlign: 'left',
+    color: '#FFC83D'
+  },
+  rightPanel: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 }));
 
@@ -88,45 +125,161 @@ const PreviewDetails = ({ className, ...rest }) => {
         <Card>
           <CardHeader
             // subheader="The information can be edited"
-            title="Pricing Details"
+            title="Preview Details"
           />
           <Divider />
-          <TableContainer component={Paper}>
-            <Table className="SimpleTable" aria-label="simple table">
-              <TableBody>
-                {data.map(function (ub) {
-                  return (
-                    <TableRow>
-                      <TableCell style={{ width: '65%' }}>
-                        <h3>{ub.ClientName}</h3>
-                        <Typography style={{ display: 'inline-block' }}>
-                          {ub.Type}{' '}
-                          <span style={{ color: '#FFC83D' }}>
-                            ({ub.Status})
+          {data.map(function (ub) {
+            return (
+              <div className={classes.root}>
+                <Paper className={classes.paper}>
+                  <Grid container spacing={2}>
+                    <Grid item></Grid>
+                    <Grid item xs={12} md={12} sm container>
+                      <Grid
+                        item
+                        md={6}
+                        xs={6}
+                        container
+                        direction="column"
+                        spacing={2}
+                      >
+                        <Grid item>
+                          <Typography component="h3" variant="h3">
+                            {ub.ClientName}
+                          </Typography>
+                          <Typography variant="subtitle1" color="textSecondary">
+                            {ub.Type}{' '}
+                            <span style={{ color: '#FFC83D' }}>
+                              ({ub.Status})
+                            </span>
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                      <Grid item md={6} xs={6}>
+                        <Typography
+                          component="h4"
+                          variant="h4"
+                          className={classes.rightPanel}
+                        >
+                          <span style={{ color: '#FFC83D' }}>PV </span>
+                          <span className={classes.right}>
+                            {ub.PVCurrency} {ub.PVAmt}
                           </span>
                         </Typography>
-                      </TableCell>
-                      <TableCell align="right" style={{ width: '35%' }}>
-                        <h3>
-                          <span style={{ color: '#FFC83D' }}>PV </span>
-                          {ub.PVCurrency} {ub.PVAmt}
-                        </h3>
-                        {ub.Date}
-                        <h3>
+                        <Typography
+                          variant="subtitle2"
+                          color="textSecondary"
+                          className={classes.right}
+                        >
+                          {ub.Date}
+                        </Typography>
+                        <Typography
+                          component="h4"
+                          variant="h4"
+                          className={classes.rightPanel}
+                        >
                           <span style={{ color: '#FFC83D' }}>Delta </span>
                           {ub.DeltaCurrency} {ub.DeltaAmt}
-                        </h3>
-                        <h3>
+                        </Typography>
+                        <Typography
+                          component="h4"
+                          variant="h4"
+                          className={classes.rightPanel}
+                        >
                           <span style={{ color: '#FFC83D' }}>Vega </span>
                           {ub.VegaCurrency} {ub.VegaAmt}
-                        </h3>
-                      </TableCell>
-                    </TableRow>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </div>
+            );
+          })}
+          {/* {data.map(function (ub) {
+            return (
+              <div className={classes.root}>
+                <div className={classes.details}>
+                  <CardContent className={classes.content}>
+                    <Typography component="h4" variant="h4">
+                      {ub.ClientName}
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                      {ub.Type}{' '}
+                      <span style={{ color: '#FFC83D' }}>({ub.Status})</span>
+                    </Typography>
+                  </CardContent>
+                </div>
+                <div className={classes.details}>
+                  <CardContent
+                    className={classes.content}
+                    style={{ textAlign: 'right' }}
+                  >
+                    <Typography component="h4" variant="h4">
+                      <span style={{ color: '#FFC83D' }}>PV </span>
+                      {ub.PVCurrency} {ub.PVAmt}
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                      {ub.Date}
+                    </Typography>
+                    <Typography component="h4" variant="h4">
+                      <span style={{ color: '#FFC83D' }}>Delta </span>
+                      {ub.DeltaCurrency} {ub.DeltaAmt}
+                    </Typography>
+                    <Typography component="h4" variant="h4">
+                      <span style={{ color: '#FFC83D' }}>Vega </span>
+                      {ub.VegaCurrency} {ub.VegaAmt}
+                    </Typography>
+                  </CardContent>
+                </div>
+              </div>
+            );
+          })} */}
+          {/* <TableContainer component={Paper}>
+            <Table className="SimpleTable" aria-label="simple table">
+              
+                {data.map(function (ub) {
+                  return (
+                    <TableBody>
+                      <TableRow>
+                        <TableCell style={{ width: '60%' }}>
+                          <h3>{ub.ClientName}</h3>
+                          <Typography style={{ display: 'inline-block' }}>
+                            {ub.Type}{' '}
+                            <span style={{ color: '#FFC83D' }}>
+                              ({ub.Status})
+                            </span>
+                          </Typography>
+                          <Typography style={{ display: 'inline-block' }}>
+                            <br/>
+                          </Typography>
+                          <br/>
+                        </TableCell>
+                        <TableCell align="right" style={{ width: '40%' }}>
+                          <h3>
+                            <span style={{ color: '#FFC83D' }}>PV </span>
+                            {ub.PVCurrency} {ub.PVAmt}
+                          </h3>
+                          {ub.Date}
+                          <h3>
+                            <span style={{ color: '#FFC83D' }}>Delta </span>
+                            {ub.DeltaCurrency} {ub.DeltaAmt}
+                          </h3>
+                          <h3>
+                            <span style={{ color: '#FFC83D' }}>Vega </span>
+                            {ub.VegaCurrency} {ub.VegaAmt}
+                          </h3>
+                        </TableCell>
+                      </TableRow>
+
+                      
+                    </TableBody>
+                    
                   );
                 })}
-              </TableBody>
+              
             </Table>
-          </TableContainer>
+          </TableContainer> */}
 
           <CardContent>
             {data.map(function (ub) {
@@ -301,7 +454,6 @@ const PreviewDetails = ({ className, ...rest }) => {
                       label="Trading DSubGrpDec"
                       required
                       variant="outlined"
-                      key={ub.TradingDSGD}
                       value={ub.TradingDSGD}
                       InputLabelProps={{ shrink: true }}
                     />
@@ -381,7 +533,7 @@ const PreviewDetails = ({ className, ...rest }) => {
               <br />
               <Button
                 className={classes.importButton}
-                color="third"
+                // color=""
                 variant="contained"
                 type="reset"
                 onClick={(e) => {

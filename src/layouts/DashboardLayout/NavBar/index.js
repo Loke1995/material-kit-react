@@ -21,7 +21,8 @@ import {
   User as UserIcon,
   UserPlus as UserPlusIcon,
   Users as UsersIcon,
-  Activity
+  Activity,
+  BarChart2
 } from 'react-feather';
 import NavItem from './NavItem';
 
@@ -51,6 +52,11 @@ const items = [
     href: '/app/account',
     icon: UserIcon,
     title: 'Report'
+  },
+  {
+    href: '/app/market',
+    icon: BarChart2,
+    title: 'Market'
   }
   // ,
   // {
