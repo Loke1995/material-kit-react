@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line, HorizontalBar } from 'react-chartjs-2';
 import {
   Box,
   Button,
@@ -96,40 +96,23 @@ const Sales = ({ className, ...rest }) => {
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
-        action={(
-          <Button
-            endIcon={<ArrowDropDownIcon />}
-            size="small"
-            variant="text"
-          >
+        action={
+          <Button endIcon={<ArrowDropDownIcon />} size="small" variant="text">
             Last 7 days
           </Button>
-        )}
+        }
         title="Latest Sales"
       />
       <Divider />
       <CardContent>
-        <Box
-          height={400}
-          position="relative"
-        >
-          <Bar
-            data={data}
-            options={options}
-          />
+        <Box height={400} position="relative">
+          <HorizontalBar data={data} options={options} />
         </Box>
       </CardContent>
       <Divider />
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        p={2}
-      >
+      <Box display="flex" justifyContent="flex-end" p={2}>
         <Button
           color="primary"
           endIcon={<ArrowRightIcon />}

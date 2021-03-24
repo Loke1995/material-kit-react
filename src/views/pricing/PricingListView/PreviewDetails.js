@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const data = [
+const data2 = [
   {
     ClientName: 'Peter',
     Type: 'Collar',
@@ -107,13 +107,50 @@ const data = [
   }
 ];
 
+const data = [
+  {
+    ClientName: 'Peter',
+    Type: 'Vanilla',
+    Status: '',
+    Date: '3 Mar 2021 5:00pm',
+    PVCurrency: '',
+    PVAmt: '',
+    DeltaCurrency: '',
+    DeltaAmt: '',
+    VegaCurrency: '',
+    VegaAmt: '',
+    BaseCcy: 'MYR|SGD|USD',
+    ProfitCurrency: 'Term',
+    TermCcy: 'MYR|SGD|USD',
+    TransactionBaseCcy: 'Buy|Sell',
+    SalesBDSN: 'Default',
+    SalesDGN: 'INTERBANK',
+    SalesDSGD: 'INTERBANK TRANSACTION',
+    SalesComment: '',
+    TradingBDBSN: 'TRG',
+    TradingDGN: 'INTERBANK',
+    TradingDSGD: 'INTERBANK TRANSACTION',
+    FXSpot: '4.057',
+    ValueDate: '5 March 2021',
+    BaseCcyUSDRate: '1.00000',
+    USDMYROpenRate: '4.92500',
+    PricingModel: 'Black Scholar',
+    CapStrike: '4.1',
+    FloorStrile: '4.0',
+    Notional: '1000000.00',
+    LeverageFactor: '2.0',
+    Dates: '1 m'
+  }
+];
+
 function resetForm() {
   alert('Great Shot!');
 }
 
 const PreviewDetails = ({ className, ...rest }) => {
+  // class PreviewDetails extends React.Component {
+  //   render() {
   const classes = useStyles();
-
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <form
@@ -149,23 +186,31 @@ const PreviewDetails = ({ className, ...rest }) => {
                           </Typography>
                           <Typography variant="subtitle1" color="textSecondary">
                             {ub.Type}{' '}
-                            <span style={{ color: '#FFC83D' }}>
-                              ({ub.Status})
-                            </span>
+                            {ub.Status ? (
+                              <span style={{ color: '#FFC83D' }}>
+                                ({ub.Status})
+                              </span>
+                            ) : (
+                              ''
+                            )}
                           </Typography>
                         </Grid>
                       </Grid>
                       <Grid item md={6} xs={6}>
-                        <Typography
-                          component="h4"
-                          variant="h4"
-                          className={classes.rightPanel}
-                        >
-                          <span style={{ color: '#FFC83D' }}>PV </span>
-                          <span className={classes.right}>
-                            {ub.PVCurrency} {ub.PVAmt}
-                          </span>
-                        </Typography>
+                        {ub.PVAmt ? (
+                          <Typography
+                            component="h4"
+                            variant="h4"
+                            className={classes.rightPanel}
+                          >
+                            <span style={{ color: '#FFC83D' }}>PV </span>
+                            <span className={classes.right}>
+                              {ub.PVCurrency} {ub.PVAmt}
+                            </span>
+                          </Typography>
+                        ) : (
+                          ''
+                        )}
                         <Typography
                           variant="subtitle2"
                           color="textSecondary"
@@ -173,22 +218,30 @@ const PreviewDetails = ({ className, ...rest }) => {
                         >
                           {ub.Date}
                         </Typography>
-                        <Typography
-                          component="h4"
-                          variant="h4"
-                          className={classes.rightPanel}
-                        >
-                          <span style={{ color: '#FFC83D' }}>Delta </span>
-                          {ub.DeltaCurrency} {ub.DeltaAmt}
-                        </Typography>
-                        <Typography
-                          component="h4"
-                          variant="h4"
-                          className={classes.rightPanel}
-                        >
-                          <span style={{ color: '#FFC83D' }}>Vega </span>
-                          {ub.VegaCurrency} {ub.VegaAmt}
-                        </Typography>
+                        {ub.DeltaAmt ? (
+                          <Typography
+                            component="h4"
+                            variant="h4"
+                            className={classes.rightPanel}
+                          >
+                            <span style={{ color: '#FFC83D' }}>Delta </span>
+                            {ub.DeltaCurrency} {ub.DeltaAmt}
+                          </Typography>
+                        ) : (
+                          ''
+                        )}
+                        {ub.VegaAmt ? (
+                          <Typography
+                            component="h4"
+                            variant="h4"
+                            className={classes.rightPanel}
+                          >
+                            <span style={{ color: '#FFC83D' }}>Vega </span>
+                            {ub.VegaCurrency} {ub.VegaAmt}
+                          </Typography>
+                        ) : (
+                          ''
+                        )}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -197,92 +250,92 @@ const PreviewDetails = ({ className, ...rest }) => {
             );
           })}
           {/* {data.map(function (ub) {
-            return (
-              <div className={classes.root}>
-                <div className={classes.details}>
-                  <CardContent className={classes.content}>
-                    <Typography component="h4" variant="h4">
-                      {ub.ClientName}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {ub.Type}{' '}
-                      <span style={{ color: '#FFC83D' }}>({ub.Status})</span>
-                    </Typography>
-                  </CardContent>
-                </div>
-                <div className={classes.details}>
-                  <CardContent
-                    className={classes.content}
-                    style={{ textAlign: 'right' }}
-                  >
-                    <Typography component="h4" variant="h4">
-                      <span style={{ color: '#FFC83D' }}>PV </span>
-                      {ub.PVCurrency} {ub.PVAmt}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {ub.Date}
-                    </Typography>
-                    <Typography component="h4" variant="h4">
-                      <span style={{ color: '#FFC83D' }}>Delta </span>
-                      {ub.DeltaCurrency} {ub.DeltaAmt}
-                    </Typography>
-                    <Typography component="h4" variant="h4">
-                      <span style={{ color: '#FFC83D' }}>Vega </span>
-                      {ub.VegaCurrency} {ub.VegaAmt}
-                    </Typography>
-                  </CardContent>
-                </div>
-              </div>
-            );
-          })} */}
-          {/* <TableContainer component={Paper}>
-            <Table className="SimpleTable" aria-label="simple table">
-              
-                {data.map(function (ub) {
-                  return (
-                    <TableBody>
-                      <TableRow>
-                        <TableCell style={{ width: '60%' }}>
-                          <h3>{ub.ClientName}</h3>
-                          <Typography style={{ display: 'inline-block' }}>
-                            {ub.Type}{' '}
-                            <span style={{ color: '#FFC83D' }}>
-                              ({ub.Status})
-                            </span>
-                          </Typography>
-                          <Typography style={{ display: 'inline-block' }}>
-                            <br/>
-                          </Typography>
-                          <br/>
-                        </TableCell>
-                        <TableCell align="right" style={{ width: '40%' }}>
-                          <h3>
-                            <span style={{ color: '#FFC83D' }}>PV </span>
-                            {ub.PVCurrency} {ub.PVAmt}
-                          </h3>
+                return (
+                  <div className={classes.root}>
+                    <div className={classes.details}>
+                      <CardContent className={classes.content}>
+                        <Typography component="h4" variant="h4">
+                          {ub.ClientName}
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          {ub.Type}{' '}
+                          <span style={{ color: '#FFC83D' }}>({ub.Status})</span>
+                        </Typography>
+                      </CardContent>
+                    </div>
+                    <div className={classes.details}>
+                      <CardContent
+                        className={classes.content}
+                        style={{ textAlign: 'right' }}
+                      >
+                        <Typography component="h4" variant="h4">
+                          <span style={{ color: '#FFC83D' }}>PV </span>
+                          {ub.PVCurrency} {ub.PVAmt}
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
                           {ub.Date}
-                          <h3>
-                            <span style={{ color: '#FFC83D' }}>Delta </span>
-                            {ub.DeltaCurrency} {ub.DeltaAmt}
-                          </h3>
-                          <h3>
-                            <span style={{ color: '#FFC83D' }}>Vega </span>
-                            {ub.VegaCurrency} {ub.VegaAmt}
-                          </h3>
-                        </TableCell>
-                      </TableRow>
-
-                      
-                    </TableBody>
-                    
-                  );
-                })}
-              
-            </Table>
-          </TableContainer> */}
+                        </Typography>
+                        <Typography component="h4" variant="h4">
+                          <span style={{ color: '#FFC83D' }}>Delta </span>
+                          {ub.DeltaCurrency} {ub.DeltaAmt}
+                        </Typography>
+                        <Typography component="h4" variant="h4">
+                          <span style={{ color: '#FFC83D' }}>Vega </span>
+                          {ub.VegaCurrency} {ub.VegaAmt}
+                        </Typography>
+                      </CardContent>
+                    </div>
+                  </div>
+                );
+              })} */}
+          {/* <TableContainer component={Paper}>
+                <Table className="SimpleTable" aria-label="simple table">
+                  
+                    {data.map(function (ub) {
+                      return (
+                        <TableBody>
+                          <TableRow>
+                            <TableCell style={{ width: '60%' }}>
+                              <h3>{ub.ClientName}</h3>
+                              <Typography style={{ display: 'inline-block' }}>
+                                {ub.Type}{' '}
+                                <span style={{ color: '#FFC83D' }}>
+                                  ({ub.Status})
+                                </span>
+                              </Typography>
+                              <Typography style={{ display: 'inline-block' }}>
+                                <br/>
+                              </Typography>
+                              <br/>
+                            </TableCell>
+                            <TableCell align="right" style={{ width: '40%' }}>
+                              <h3>
+                                <span style={{ color: '#FFC83D' }}>PV </span>
+                                {ub.PVCurrency} {ub.PVAmt}
+                              </h3>
+                              {ub.Date}
+                              <h3>
+                                <span style={{ color: '#FFC83D' }}>Delta </span>
+                                {ub.DeltaCurrency} {ub.DeltaAmt}
+                              </h3>
+                              <h3>
+                                <span style={{ color: '#FFC83D' }}>Vega </span>
+                                {ub.VegaCurrency} {ub.VegaAmt}
+                              </h3>
+                            </TableCell>
+                          </TableRow>
+    
+                          
+                        </TableBody>
+                        
+                      );
+                    })}
+                  
+                </Table>
+              </TableContainer> */}
 
           <CardContent>
-            {data.map(function (ub) {
+            {data2.map(function (ub) {
               return (
                 <Grid container spacing={3}>
                   <Grid item md={6} xs={12}>
@@ -292,18 +345,16 @@ const PreviewDetails = ({ className, ...rest }) => {
                       required
                       select
                       variant="outlined"
-                      key={ub.BaseCcy}
                       SelectProps={{ native: true }}
                       InputLabelProps={{ shrink: true }}
                     >
-                      <option key={ub.BaseCcy} value={ub.BaseCcy}>
-                        {ub.BaseCcy}
-                      </option>
-                      {/* {dropdownlist.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))} */}
+                      {ub.BaseCcy.split('|').map(function (option) {
+                        return (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        );
+                      })}
                     </TextField>
                   </Grid>
 
@@ -314,18 +365,16 @@ const PreviewDetails = ({ className, ...rest }) => {
                       required
                       variant="outlined"
                       select
-                      key={ub.ProfitCurrency}
                       SelectProps={{ native: true }}
                       InputLabelProps={{ shrink: true }}
                     >
-                      <option key={ub.ProfitCurrency} value={ub.ProfitCurrency}>
-                        {ub.ProfitCurrency}
-                      </option>
-                      {/* {dropdownlist.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))} */}
+                      {ub.ProfitCurrency.split('|').map(function (option) {
+                        return (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        );
+                      })}
                     </TextField>
                   </Grid>
 
@@ -336,18 +385,16 @@ const PreviewDetails = ({ className, ...rest }) => {
                       required
                       variant="outlined"
                       select
-                      key={ub.TermCcy}
                       SelectProps={{ native: true }}
                       InputLabelProps={{ shrink: true }}
                     >
-                      <option key={ub.TermCcy} value={ub.TermCcy}>
-                        {ub.TermCcy}
-                      </option>
-                      {/* {dropdownlist.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))} */}
+                      {ub.TermCcy.split('|').map(function (option) {
+                        return (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        );
+                      })}
                     </TextField>
                   </Grid>
 
@@ -358,21 +405,16 @@ const PreviewDetails = ({ className, ...rest }) => {
                       required
                       variant="outlined"
                       select
-                      key={ub.TransactionBaseCcy}
                       SelectProps={{ native: true }}
                       InputLabelProps={{ shrink: true }}
                     >
-                      <option
-                        key={ub.TransactionBaseCcy}
-                        value={ub.TransactionBaseCcy}
-                      >
-                        {ub.TransactionBaseCcy}
-                      </option>
-                      {/* {dropdownlist.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))} */}
+                      {ub.TransactionBaseCcy.split('|').map(function (option) {
+                        return (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        );
+                      })}
                     </TextField>
                   </Grid>
 
@@ -382,8 +424,8 @@ const PreviewDetails = ({ className, ...rest }) => {
                       label="Sales BDShortName"
                       required
                       variant="outlined"
-                      key={ub.SalesBDSN}
-                      value={ub.SalesBDSN}
+                      key="SalesBDSN"
+                      placeholder="Default"
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
@@ -394,8 +436,8 @@ const PreviewDetails = ({ className, ...rest }) => {
                       label="Sales DGroupName"
                       required
                       variant="outlined"
-                      key={ub.SalesDGN}
-                      value={ub.SalesDGN}
+                      key="SalesDGN"
+                      placeholder="INTERBANK"
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
@@ -406,8 +448,8 @@ const PreviewDetails = ({ className, ...rest }) => {
                       label="Sales DSubGrpDesc"
                       required
                       variant="outlined"
-                      key={ub.SalesDSGD}
-                      value={ub.SalesDSGD}
+                      key="SalesDSGD"
+                      placeholder="INTERBANK TRANSACTION"
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
@@ -418,8 +460,7 @@ const PreviewDetails = ({ className, ...rest }) => {
                       label="Sales Comment"
                       required
                       variant="outlined"
-                      key={ub.SalesComment}
-                      value={ub.SalesComment}
+                      key="SalesComment"
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
@@ -430,8 +471,8 @@ const PreviewDetails = ({ className, ...rest }) => {
                       label="Trading BDBranchShortName"
                       required
                       variant="outlined"
-                      key={ub.TradingBDBSN}
-                      value={ub.TradingBDBSN}
+                      key="TradingBDBSN"
+                      placeholder="TRG"
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
@@ -442,8 +483,8 @@ const PreviewDetails = ({ className, ...rest }) => {
                       label="Trading DGroupName"
                       required
                       variant="outlined"
-                      key={ub.TradingDGN}
-                      value={ub.TradingDGN}
+                      key="TradingDGN"
+                      placeholder="INTERBANK"
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
@@ -454,7 +495,8 @@ const PreviewDetails = ({ className, ...rest }) => {
                       label="Trading DSubGrpDec"
                       required
                       variant="outlined"
-                      value={ub.TradingDSGD}
+                      key="TradingDSGD"
+                      placeholder="INTERBANK TRANSACTION"
                       InputLabelProps={{ shrink: true }}
                     />
                   </Grid>
@@ -467,59 +509,59 @@ const PreviewDetails = ({ className, ...rest }) => {
             <br />
             <Grid container spacing={3}>
               {/* {templateDataSecondPart.map(function (option) {
-                if (option.FieldType === 'text') {
-                  return (
-                    <Grid item md={6} xs={12}>
-                      <TextField
-                        fullWidth
-                        label={option.FieldLabel}
-                        required
-                        variant="outlined"
-                        key={option.FieldPlaceHolder}
-                        InputLabelProps={{ shrink: true }}
-                      />
-                    </Grid>
-                  );
-                } else if (option.FieldType === 'dropdown') {
-                  var dropdownlist = option.FieldPlaceHolder.split('|');
-
-                  return (
-                    <Grid item md={6} xs={12}>
-                      <TextField
-                        fullWidth
-                        label={option.FieldLabel}
-                        name="state"
-                        required
-                        select
-                        SelectProps={{ native: true }}
-                        key={dropdownlist[0]}
-                        variant="outlined"
-                      >
-                        {dropdownlist.map((option) => (
-                          <option key={option} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </TextField>
-                    </Grid>
-                  );
-                } else if (option.FieldType === 'date') {
-                  return (
-                    <Grid item md={6} xs={12}>
-                      <TextField
-                        fullWidth
-                        name="startDate"
-                        label={option.FieldLabel}
-                        required
-                        SelectProps={{ native: true }}
-                        variant="outlined"
-                        type="date"
-                        InputLabelProps={{ shrink: true }}
-                      />
-                    </Grid>
-                  );
-                }
-              })} */}
+                    if (option.FieldType === 'text') {
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            label={option.FieldLabel}
+                            required
+                            variant="outlined"
+                            key={option.FieldPlaceHolder}
+                            InputLabelProps={{ shrink: true }}
+                          />
+                        </Grid>
+                      );
+                    } else if (option.FieldType === 'dropdown') {
+                      var dropdownlist = option.FieldPlaceHolder.split('|');
+    
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            label={option.FieldLabel}
+                            name="state"
+                            required
+                            select
+                            SelectProps={{ native: true }}
+                            key={dropdownlist[0]}
+                            variant="outlined"
+                          >
+                            {dropdownlist.map((option) => (
+                              <option key={option} value={option}>
+                                {option}
+                              </option>
+                            ))}
+                          </TextField>
+                        </Grid>
+                      );
+                    } else if (option.FieldType === 'date') {
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            name="startDate"
+                            label={option.FieldLabel}
+                            required
+                            SelectProps={{ native: true }}
+                            variant="outlined"
+                            type="date"
+                            InputLabelProps={{ shrink: true }}
+                          />
+                        </Grid>
+                      );
+                    }
+                  })} */}
             </Grid>
 
             <Box display="flex" justifyContent="flex-end" p={2}>
@@ -545,7 +587,6 @@ const PreviewDetails = ({ className, ...rest }) => {
               </Button>
             </Box>
           </CardContent>
-          {/* <Divider /> */}
         </Card>
       </form>
 

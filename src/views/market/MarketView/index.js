@@ -17,6 +17,7 @@ import Page from '/src/components/Page';
 // import TotalProfit from './TotalProfit';
 // import TrafficByDevice from './TrafficByDevice';
 import Prices from './prices';
+import CurrencyPair from './currencyPair';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -128,6 +129,11 @@ const Dashboard = () => {
 
           {/* <Grid container lg={12} sm={12} xl={12} xs={12}> */}
           <Prices />
+
+          <Grid item lg={3} sm={6} xl={3} xs={12}>
+            <CurrencyPair />
+          </Grid>
+
           {/* </Grid> */}
           {/* <Grid item lg={3} sm={6} xl={3} xs={12}>
             <Budget />
