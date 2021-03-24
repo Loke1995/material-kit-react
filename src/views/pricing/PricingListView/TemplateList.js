@@ -151,7 +151,7 @@ const TemplateList = ({ className, ...rest }) => {
           </ListItem>
         ))}
       </List> */}
-      <Divider />
+      {/* <Divider />
       <Box display="flex" justifyContent="flex-end" p={2}>
         <Button
           color="primary"
@@ -161,7 +161,7 @@ const TemplateList = ({ className, ...rest }) => {
         >
           View all
         </Button>
-      </Box>
+      </Box> */}
     </Card>
   );
 };

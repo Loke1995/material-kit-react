@@ -433,7 +433,7 @@ class PreviewDetails extends React.Component {
                       />
                     </Grid>
 
-                    <Grid item md={6} xs={12}>
+                    <Grid item md={12} xs={12}>
                       <TextField
                         fullWidth
                         multiline
@@ -454,7 +454,7 @@ class PreviewDetails extends React.Component {
                   className={classes.importButton}
                   color="primary"
                   variant="contained"
-                  onClick={(e) => {
+                  onClick={() => {
                     this.alertMsg('Saved');
                   }}
                 >

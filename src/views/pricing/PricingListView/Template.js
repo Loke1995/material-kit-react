@@ -221,6 +221,9 @@ const Template = ({ className, ...rest }) => {
                 className={classes.importButton}
                 color="primary"
                 variant="contained"
+                onClick={() => {
+                  alert('Created');
+                }}
               >
                 Create
               </Button>

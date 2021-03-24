@@ -563,6 +563,9 @@ export default function CreateDetails() {
                 className={classes.importButton}
                 color="primary"
                 variant="contained"
+                onClick={() => {
+                  alert('Created');
+                }}
               >
                 Create
               </Button>
@@ -1017,6 +1020,9 @@ const PreviewDetails2 = ({ className, ...rest }) => {
                 className={classes.importButton}
                 color="primary"
                 variant="contained"
+                onClick={() => {
+                  alert('Created');
+                }}
               >
                 Create
               </Button>
