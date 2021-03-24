@@ -69,7 +69,7 @@ const FXSpotList = ({ className, ...rest }) => {
           </div>
         }
         title={<Badge color="secondary">FXSpot</Badge>}
-        subheader="22 March 2021"
+        subheader="22 March 2021 2:17PM"
       />
       <Divider />
 

@@ -77,8 +77,8 @@ const TemplateList = ({ className, ...rest }) => {
             </Button>
           </div>
         }
-        title={<Badge color="secondary">Latest Pricing</Badge>}
-        subheader="22 March 2021"
+        title={<Badge color="secondary">Template Listing</Badge>}
+        // subheader="22 March 2021"
       />
       <Divider />
 

@@ -6,7 +6,7 @@ import Toolbar from './Toolbar';
 import Template from './Template';
 import TemplateList from './TemplateList';
 import FXSpot from './FXSpotList';
-import PreviewDetails from './PreviewDetails';
+import CreateDetails from './CreateDetails';
 import BucketList from './BucketList';
 import LatestOrders from './LatestOrders';
 import data from './data';
@@ -27,14 +27,13 @@ const PricingListView = () => {
   return (
     <Page className={classes.root} title="Customers">
       <Container maxWidth={false}>
-        <Grid container spacing={2}>
+        {/* <Grid container spacing={2}>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
             <BucketList />
           </Grid>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
-            {/* <FXSpot /> */}
           </Grid>
-        </Grid>
+        </Grid> */}
 
         <Grid container spacing={2}>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
@@ -47,18 +46,18 @@ const PricingListView = () => {
 
         <Grid container spacing={2}>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
-            <PreviewDetails />
+            <CreateDetails />
           </Grid>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
             <FXSpot />
           </Grid>
         </Grid>
 
-        <Grid container spacing={2}>
+        {/* <Grid container spacing={2}>
           <Grid item lg={12} md={12} xl={12} xs={12}>
             <LatestOrders />
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* <Toolbar />
         <Box mt={3}>
