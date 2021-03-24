@@ -130,7 +130,7 @@ const Dashboard = () => {
           {/* <Grid container lg={12} sm={12} xl={12} xs={12}> */}
           <Prices />
 
-          <Grid item lg={3} sm={6} xl={3} xs={12}>
+          <Grid item lg={6} sm={6} xl={6} xs={12}>
             <CurrencyPair />
           </Grid>
 
