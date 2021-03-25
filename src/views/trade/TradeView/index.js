@@ -39,6 +39,12 @@ const TradeView = () => {
         <Box mt={3}>
           <Results customers={customers} />
         </Box> */}
+        <Grid container spacing={2}>
+          <Grid item lg={12} md={12} xl={12} xs={12}></Grid>
+        </Grid>
+        <br />
+        <br />
+        <br />
       </Container>
     </Page>
   );
