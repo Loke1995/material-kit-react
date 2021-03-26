@@ -27,6 +27,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import RefreshIcon from '@material-ui/icons/Refresh';
+
 const styles = (theme) => ({
   root: {
     display: 'flex'
@@ -153,14 +155,26 @@ class CreateDetails extends React.Component {
     super(props);
     this.state = {
       dataPV: data,
-      pricingV: true
+      pricingV: true,
+      fxspot: 4.1057
     };
     this.hideButton = this.hideButton.bind(this);
+    this.updateFXSpot = this.updateFXSpot.bind(this);
   }
 
   hideButton(item) {
     this.setState({
       pricingV: item
+    });
+  }
+
+  updateFXSpot() {
+    const min = -0.1;
+    const max = 0.1;
+    const rand = min + Math.random() * (max - min);
+
+    this.setState({
+      fxspot: this.state.fxspot + rand
     });
   }
 
@@ -172,7 +186,7 @@ class CreateDetails extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { dataPV, pricingV } = this.state;
+    const { fxspot, pricingV } = this.state;
     return (
       <div className={classes.root}>
         <form autoComplete="off" noValidate className={clsx(classes.root)}>
@@ -182,8 +196,244 @@ class CreateDetails extends React.Component {
               title="Create Details"
             />
             <Divider />
-
             <CardContent>
+              <Grid container spacing={3}>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Base Ccy"
+                    required
+                    select
+                    variant="outlined"
+                    SelectProps={{ native: true }}
+                    InputLabelProps={{ shrink: true }}
+                  >
+                    {data2[0].BaseCcy.split('|').map(function (option) {
+                      return (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      );
+                    })}
+                  </TextField>
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Profit Currency"
+                    required
+                    variant="outlined"
+                    select
+                    SelectProps={{ native: true }}
+                    InputLabelProps={{ shrink: true }}
+                  >
+                    {data2[0].ProfitCurrency.split('|').map(function (option) {
+                      return (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      );
+                    })}
+                  </TextField>
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Term Ccy"
+                    required
+                    variant="outlined"
+                    select
+                    SelectProps={{ native: true }}
+                    InputLabelProps={{ shrink: true }}
+                  >
+                    {data2[0].TermCcy.split('|').map(function (option) {
+                      return (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      );
+                    })}
+                  </TextField>
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Client Sell or Buy Base Ccy"
+                    required
+                    variant="outlined"
+                    select
+                    SelectProps={{ native: true }}
+                    InputLabelProps={{ shrink: true }}
+                  >
+                    {data2[0].TransactionBaseCcy.split('|').map(function (
+                      option
+                    ) {
+                      return (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      );
+                    })}
+                  </TextField>
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Sales BDShortName"
+                    required
+                    variant="outlined"
+                    key="SalesBDSN"
+                    placeholder="Default"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Sales DGroupName"
+                    required
+                    variant="outlined"
+                    key="SalesDGN"
+                    placeholder="INTERBANK"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Sales DSubGrpDesc"
+                    required
+                    variant="outlined"
+                    key="SalesDSGD"
+                    placeholder="INTERBANK TRANSACTION"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Sales Comment"
+                    required
+                    variant="outlined"
+                    key="SalesComment"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Trading BDBranchShortName"
+                    required
+                    variant="outlined"
+                    key="TradingBDBSN"
+                    placeholder="TRG"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Trading DGroupName"
+                    required
+                    variant="outlined"
+                    key="TradingDGN"
+                    placeholder="INTERBANK"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Trading DSubGrpDec"
+                    required
+                    variant="outlined"
+                    key="TradingDSGD"
+                    placeholder="INTERBANK TRANSACTION"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="FXSpot"
+                    required
+                    disabled
+                    variant="outlined"
+                    key="TradingDSGD"
+                    value={fxspot.toLocaleString(undefined, {
+                      minimumFractionDigits: 5
+                    })}
+                    InputProps={{
+                      endAdornment: (
+                        <Button
+                          onClick={(e) => {
+                            // alert('Refreshed');
+                            this.updateFXSpot();
+                          }}
+                        >
+                          <RefreshIcon style={{ color: 'blue' }} />
+                        </Button>
+                      )
+                    }}
+                  />
+                </Grid>
+              </Grid>
+              <br />
+
+              {pricingV ? (
+                <Box display="flex" justifyContent="flex-end" p={2}>
+                  <Button
+                    className={classes.importButton}
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      alert('Load Pricing');
+                      this.setState({
+                        dataPV: data2
+                      });
+                      this.hideButton(false);
+                    }}
+                  >
+                    Pricing
+                  </Button>
+                  <br />
+                  <Button
+                    className={classes.importButton}
+                    variant="contained"
+                    type="reset"
+                    onClick={(e) => {
+                      var result = window.confirm(
+                        'Are you sure to clear all field?'
+                      );
+                      if (result) {
+                        this.setState({
+                          dataPV: data
+                        });
+                      } else {
+                        e.preventDefault();
+                      }
+                    }}
+                  >
+                    Clear
+                  </Button>
+                </Box>
+              ) : (
+                <Box></Box>
+              )}
+            </CardContent>
+
+            {/* <CardContent>
               {data2.map(function (ub) {
                 return (
                   <Grid container spacing={3}>
@@ -351,68 +601,34 @@ class CreateDetails extends React.Component {
                         InputLabelProps={{ shrink: true }}
                       />
                     </Grid>
+
+                    <Grid item md={6} xs={12}>
+                      <TextField
+                        fullWidth
+                        label="Trading DSubGrpDec"
+                        required
+                        disabled
+                        variant="outlined"
+                        key="TradingDSGD"
+                        value="4.057"
+                        InputProps={{
+                          endAdornment: (
+                            <Button
+                              onClick={(e) => {
+                                alert('Refreshed');
+                              }}
+                            >
+                              <RefreshIcon style={{ color: 'blue' }} />
+                            </Button>
+                          )
+                        }}
+                      />
+                    </Grid>
                   </Grid>
                 );
               })}
 
               <br />
-
-              {/* <Grid container spacing={3}> */}
-              {/* {templateDataSecondPart.map(function (option) {
-                      if (option.FieldType === 'text') {
-                        return (
-                          <Grid item md={6} xs={12}>
-                            <TextField
-                              fullWidth
-                              label={option.FieldLabel}
-                              required
-                              variant="outlined"
-                              key={option.FieldPlaceHolder}
-                              InputLabelProps={{ shrink: true }}
-                            />
-                          </Grid>
-                        );
-                      } else if (option.FieldType === 'dropdown') {
-                        var dropdownlist = option.FieldPlaceHolder.split('|');
-      
-                        return (
-                          <Grid item md={6} xs={12}>
-                            <TextField
-                              fullWidth
-                              label={option.FieldLabel}
-                              name="state"
-                              required
-                              select
-                              SelectProps={{ native: true }}
-                              key={dropdownlist[0]}
-                              variant="outlined"
-                            >
-                              {dropdownlist.map((option) => (
-                                <option key={option} value={option}>
-                                  {option}
-                                </option>
-                              ))}
-                            </TextField>
-                          </Grid>
-                        );
-                      } else if (option.FieldType === 'date') {
-                        return (
-                          <Grid item md={6} xs={12}>
-                            <TextField
-                              fullWidth
-                              name="startDate"
-                              label={option.FieldLabel}
-                              required
-                              SelectProps={{ native: true }}
-                              variant="outlined"
-                              type="date"
-                              InputLabelProps={{ shrink: true }}
-                            />
-                          </Grid>
-                        );
-                      }
-                    })} */}
-              {/* </Grid> */}
 
               {pricingV ? (
                 <Box display="flex" justifyContent="flex-end" p={2}>
@@ -421,7 +637,7 @@ class CreateDetails extends React.Component {
                     color="primary"
                     variant="contained"
                     onClick={() => {
-                      alert('Created');
+                      alert('Load Pricing');
                       this.setState({
                         dataPV: data2
                       });
@@ -433,13 +649,8 @@ class CreateDetails extends React.Component {
                   <br />
                   <Button
                     className={classes.importButton}
-                    // color=""
                     variant="contained"
                     type="reset"
-                    // onClick={(e) => {
-                    //   if (!window.confirm('Are you sure to clear all field?'))
-                    //     e.preventDefault();
-                    // }}
                     onClick={(e) => {
                       var result = window.confirm(
                         'Are you sure to clear all field?'
@@ -459,7 +670,7 @@ class CreateDetails extends React.Component {
               ) : (
                 <Box></Box>
               )}
-            </CardContent>
+            </CardContent> */}
 
             {/* {this.state.dataPV.map(function (ub) {
               return (
@@ -553,14 +764,14 @@ class CreateDetails extends React.Component {
                     color="primary"
                     variant="contained"
                     onClick={() => {
-                      alert('Created');
+                      alert('Trade Reviewing');
                       this.setState({
                         dataPV: data
                       });
                       this.hideButton(true);
                     }}
                   >
-                    Submit
+                    Trade Review
                   </Button>
                 </Box>
               </Paper>

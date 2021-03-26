@@ -30,7 +30,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
 
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
-      <Toolbar>
+      <Toolbar style={{ background: '#333' }}>
         <RouterLink to="/">
           <Logo />
         </RouterLink>
@@ -42,16 +42,16 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
               color="primary"
               variant="dot"
             >
-              <NotificationsIcon />
+              <NotificationsIcon style={{ color: 'white' }} />
             </Badge>
           </IconButton>
           <IconButton color="inherit">
-            <InputIcon />
+            <InputIcon style={{ color: 'white' }} />
           </IconButton>
         </Hidden>
         <Hidden lgUp>
           <IconButton color="inherit" onClick={onMobileNavOpen}>
-            <MenuIcon />
+            <MenuIcon style={{ color: 'white' }} />
           </IconButton>
         </Hidden>
       </Toolbar>

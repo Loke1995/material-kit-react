@@ -46,10 +46,11 @@ const PricingListView = () => {
 
         <Grid container spacing={2}>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
-            <CreateDetails />
+            {/* <CreateDetails /> */}
+            <FXSpot />
           </Grid>
           <Grid item lg={6} sm={6} xl={6} xs={12}>
-            <FXSpot />
+            {/* <FXSpot /> */}
           </Grid>
         </Grid>
 

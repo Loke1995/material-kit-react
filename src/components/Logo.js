@@ -10,11 +10,11 @@ const Logo = (props) => {
         <img
           style={{ height: '1.8rem', width: 'auto' }}
           alt="Logo"
-          src="/static/favicon.ico"
+          src="/static/logo_white_maybank.png"
           {...props}
         />
       </IconButton>
-      Maestro
+      {/* Maestro */}
     </h1>
   );
 };
