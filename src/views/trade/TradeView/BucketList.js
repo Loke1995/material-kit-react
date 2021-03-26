@@ -8,37 +8,19 @@ import {
   CardHeader,
   Divider,
   makeStyles,
-  Badge,
   Typography,
   Grid,
-  List,
-  ListItem,
-  ListItemText,
   Collapse,
   TextField
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Accordion from '@material-ui/core/Accordion';
 
 const data = [
   {
@@ -251,7 +233,7 @@ const BucketList = ({ className, ...rest }) => {
     <Card>
       <CardHeader
         // subheader="The information can be edited"
-        title="Bucket Listing"
+        title="Bucket Review Listing"
       />
       <Divider />
       {data.map((ub, i) => {

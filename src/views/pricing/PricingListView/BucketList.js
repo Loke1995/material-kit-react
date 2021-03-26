@@ -251,7 +251,7 @@ const BucketList = ({ className, ...rest }) => {
     <Card>
       <CardHeader
         // subheader="The information can be edited"
-        title="Bucket Listing"
+        title="Bucket Review Listing"
       />
       <Divider />
       {data.map((ub, i) => {

@@ -388,6 +388,126 @@ class CreateDetails extends React.Component {
                     }}
                   />
                 </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Value Date"
+                    required
+                    variant="outlined"
+                    key="ValueDate"
+                    placeholder=""
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="BaseCcyUSDRate"
+                    required
+                    variant="outlined"
+                    key="BaseCcyUSDRate"
+                    value="1.00000"
+                    disabled
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="USDMYROpenRate"
+                    required
+                    variant="outlined"
+                    key="USDMYROpenRate"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Pricing Model"
+                    required
+                    variant="outlined"
+                    key="PricingModel"
+                    placeholder="Black Scholar"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Cap Strike"
+                    required
+                    variant="outlined"
+                    key="CapStrike"
+                    placeholder="4.1"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Floor Strike"
+                    required
+                    variant="outlined"
+                    key="FloorStrike"
+                    placeholder="4.0"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Notional"
+                    required
+                    variant="outlined"
+                    key="Notional"
+                    placeholder="1,000,000.00"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Leverage Factor"
+                    required
+                    variant="outlined"
+                    key="LeverageFactor"
+                    placeholder="2.0"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Date"
+                    required
+                    variant="outlined"
+                    select
+                    SelectProps={{ native: true }}
+                    InputLabelProps={{ shrink: true }}
+                  >
+                    <option key={'weekly'} value={'weekly'}>
+                      Weekly
+                    </option>
+                    <option key={'monthly'} value={'monthly'}>
+                      Monthly
+                    </option>
+                    <option key={'quarterly'} value={'quarterly'}>
+                      Quarterly
+                    </option>
+                    <option key={'halfYearly'} value={'halfYearly'}>
+                      Half Yearly
+                    </option>
+                    <option key={'yearly'} value={'yearly'}>
+                      Yearly
+                    </option>
+                  </TextField>
+                </Grid>
               </Grid>
               <br />
 
@@ -771,7 +891,22 @@ class CreateDetails extends React.Component {
                       this.hideButton(true);
                     }}
                   >
-                    Trade Review
+                    Review
+                  </Button>
+                  <br />
+                  <Button
+                    className={classes.importButton}
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      alert('Trade Reviewing');
+                      this.setState({
+                        dataPV: data
+                      });
+                      this.hideButton(true);
+                    }}
+                  >
+                    Book
                   </Button>
                 </Box>
               </Paper>

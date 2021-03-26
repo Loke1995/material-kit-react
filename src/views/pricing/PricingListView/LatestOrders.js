@@ -36,7 +36,8 @@ import {
   TableSortLabel,
   Tooltip,
   makeStyles,
-  Paper
+  Paper,
+  TablePagination
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { DataGrid } from '@material-ui/data-grid';
@@ -220,28 +221,32 @@ const LatestOrders = ({ className, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Latest Orders" />
+      <CardHeader title="Trade Listing" />
       <Divider />
 
-      <MaterialTable
-        title="Table Preview"
-        columns={columns}
-        data={data}
-        options={{
-          sorting: true,
-          rowStyle: {
-            whiteSpace: 'nowrap',
-            textAlign: 'left',
-            flexDirection: 'row',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            paddingLeft: 5,
-            paddingRight: 5,
-            fontWeight: 'bold'
-          }
-        }}
-        icons={tableIcons}
-      />
+      <div style={{ backgroundColor: 'red' }}>
+        <MaterialTable
+          title="Table Preview"
+          columns={columns}
+          data={data}
+          options={{
+            sorting: true,
+            rowStyle: {
+              fontFamily: 'Roboto',
+              whiteSpace: 'nowrap',
+              textAlign: 'left',
+              flexDirection: 'row',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              paddingLeft: 5,
+              paddingRight: 5,
+              fontWeight: 'bold',
+              backgroundColor: '#EEE'
+            }
+          }}
+          icons={tableIcons}
+        />
+      </div>
 
       {/* <DataGrid rows={rows} columns={columns} pageSize={5} /> */}
 

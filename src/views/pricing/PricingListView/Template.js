@@ -260,7 +260,19 @@ class Template extends React.Component {
                   color="primary"
                   variant="contained"
                   onClick={() => {
-                    alert('Created');
+                    alert('Saved');
+                    // this.createTemplate();
+                  }}
+                >
+                  Save
+                </Button>
+                <br />
+                <Button
+                  className={classes.importButton}
+                  color="primary"
+                  variant="contained"
+                  onClick={() => {
+                    // alert('Created');
                     this.createTemplate();
                   }}
                 >
