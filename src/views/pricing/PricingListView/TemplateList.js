@@ -2,13 +2,10 @@ import React, { useState, setState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
-  Box,
-  Button,
   Card,
   CardHeader,
   Divider,
   makeStyles,
-  Badge,
   Typography,
   Grid,
   TextField,
@@ -33,6 +30,8 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Avatar from '@material-ui/core/Avatar';
+
+import { withStyles } from '@material-ui/styles';
 
 const data = [
   {
@@ -79,7 +78,7 @@ const data = [
   }
 ];
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
   root: {
     height: '100%'
   },
@@ -129,271 +128,566 @@ const useStyles = makeStyles((theme) => ({
   divFullWidth: {
     width: '100%'
   }
-}));
+});
 
-const TemplateList = ({ className, ...rest }) => {
-  const classes = useStyles();
+class TemplateList extends React.Component {
+  constructor() {
+    super();
+    this.clickTemplate = this.clickTemplate.bind(this);
+    this.state = {
+      data: '',
+      expanded: false
+    };
+  }
+  clickTemplate(word) {
+    this.setState({
+      // data: event.target.value
+      data: word
+    });
+    this.props.methodfromparent(this.state.data);
+  }
 
-  let hidingOn = useState(false);
+  render() {
+    const { classes } = this.props;
+    // const [expanded, setExpanded] = React.useState(false);
 
-  const [expanded, setExpanded] = React.useState(false);
+    const handleChange = (panel) => (event, isExpanded) => {
+      // setExpanded(isExpanded ? panel : false);
+      isExpanded
+        ? this.setState({ expanded: panel })
+        : this.setState({ expanded: false });
+    };
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
-
-  return (
-    <Card>
-      <CardHeader
-        // subheader="The information can be edited"
-        title="Template Listing"
-      />
-      <Divider />
-      {data.map((ub) => {
-        return (
-          <div>
-            <Accordion
-              expanded={expanded === ub.TemplateName}
-              onChange={handleChange(ub.TemplateName)}
-            >
-              <AccordionSummary
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
+    return (
+      <Card>
+        <CardHeader
+          // subheader="The information can be edited"
+          title="Template Listing"
+        />
+        <Divider />
+        {data.map((ub) => {
+          return (
+            <div>
+              <Accordion
+                expanded={this.state.expanded === ub.TemplateName}
+                onChange={handleChange(ub.TemplateName)}
               >
-                <Grid item lg={12} sm={12} xl={12} xs={12}>
-                  <CardContent
-                    style={{
-                      paddingBottom: '0px',
-                      paddingTop: '0px',
-                      paddingLeft: '0.5rem',
-                      paddingRight: '0.5rem'
-                    }}
-                  >
-                    <Grid container justify="space-between" spacing={1}>
-                      <Grid item lg={6} sm={6} xl={6} xs={6}>
-                        <Typography
-                          color="textPrimary"
-                          gutterBottom
-                          variant="h4"
+                <AccordionSummary
+                  // expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
+                >
+                  <Grid item lg={12} sm={12} xl={12} xs={12}>
+                    <CardContent
+                      style={{
+                        paddingBottom: '0px',
+                        paddingTop: '0px',
+                        paddingLeft: '0.5rem',
+                        paddingRight: '0.5rem'
+                      }}
+                    >
+                      <Grid container justify="space-between" spacing={1}>
+                        <Grid item lg={6} sm={6} xl={6} xs={6}>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h4"
+                          >
+                            <span
+                              style={{ color: '#FFC83D' }}
+                              onClick={() =>
+                                this.props.methodfromparent(
+                                  ub.TemplateName,
+                                  ub.TemplateType
+                                )
+                              }
+                            >
+                              {ub.TemplateType}
+                            </span>
+                            {' for '}
+                            {ub.TemplateName}
+                          </Typography>
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            {ub.TemplateStatus}
+                          </Typography>
+                        </Grid>
+                        <Grid
+                          item
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={6}
+                          className={classes.right}
                         >
-                          <span style={{ color: '#FFC83D' }}>
-                            {ub.TemplateType}
-                          </span>
-                          {' for '}
-                          {ub.TemplateName}
-                        </Typography>
-                        <Typography
-                          color="textSecondary"
-                          gutterBottom
-                          variant="h6"
-                        >
-                          {ub.TemplateStatus}
-                        </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h4"
+                          >
+                            {ub.TemplateCurrency}{' '}
+                            {ub.TemplateAmount.toLocaleString(undefined, {
+                              maximumFractionDigits: 2
+                            })}
+                          </Typography>
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            {ub.TemplateDate}
+                          </Typography>
+                        </Grid>
                       </Grid>
-                      <Grid
-                        item
-                        lg={6}
-                        sm={6}
-                        xl={6}
-                        xs={6}
-                        className={classes.right}
-                      >
-                        <Typography
-                          color="textPrimary"
-                          gutterBottom
-                          variant="h4"
-                        >
-                          {ub.TemplateCurrency}{' '}
-                          {ub.TemplateAmount.toLocaleString(undefined, {
-                            maximumFractionDigits: 2
-                          })}
-                        </Typography>
-                        <Typography
-                          color="textSecondary"
-                          gutterBottom
-                          variant="h6"
-                        >
-                          {ub.TemplateDate}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Grid>
-              </AccordionSummary>
+                    </CardContent>
+                  </Grid>
+                </AccordionSummary>
 
-              <AccordionDetails>
-                <div className={classes.divFullWidth}>
-                  <Paper className={classes.paper}>
-                    <Grid container lg={12} sm={12} xl={12} xs={12} spacing={2}>
-                      {/* <Grid container justify="space-between" spacing={2}> */}
+                <AccordionDetails>
+                  <div className={classes.divFullWidth}>
+                    <Paper className={classes.paper}>
                       <Grid
-                        lg={6}
-                        sm={6}
-                        xl={6}
-                        xs={12}
                         container
-                        justify="space-between"
-                        style={{ padding: '0.5rem' }}
+                        lg={12}
+                        sm={12}
+                        xl={12}
+                        xs={12}
+                        spacing={2}
                       >
-                        <Typography
-                          color="textSecondary"
-                          gutterBottom
-                          variant="h5"
+                        {/* <Grid container justify="space-between" spacing={2}> */}
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
                         >
-                          Generate:
-                        </Typography>
-                        <Typography
-                          color="textPrimary"
-                          gutterBottom
-                          variant="h5"
-                          style={{ color: '#FFC83D' }}
-                        >
-                          {ub.TemplateGen}
-                        </Typography>
-                      </Grid>
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h5"
+                          >
+                            Generate:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h5"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateGen}
+                          </Typography>
+                        </Grid>
 
-                      <Grid
-                        lg={6}
-                        sm={6}
-                        xl={6}
-                        xs={12}
-                        container
-                        justify="space-between"
-                        style={{ padding: '0.5rem' }}
-                      >
-                        <Typography
-                          color="textSecondary"
-                          gutterBottom
-                          variant="h5"
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
                         >
-                          CcyPair:
-                        </Typography>
-                        <Typography
-                          color="textPrimary"
-                          gutterBottom
-                          variant="h5"
-                          style={{ color: '#FFC83D' }}
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h5"
+                          >
+                            CcyPair:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h5"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplatePair}
+                          </Typography>
+                        </Grid>
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
                         >
-                          {ub.TemplatePair}
-                        </Typography>
-                      </Grid>
-                      <Grid
-                        lg={6}
-                        sm={6}
-                        xl={6}
-                        xs={12}
-                        container
-                        justify="space-between"
-                        style={{ padding: '0.5rem' }}
-                      >
-                        <Typography
-                          color="textSecondary"
-                          gutterBottom
-                          variant="h5"
-                        >
-                          Center:
-                        </Typography>
-                        <Typography
-                          color="textPrimary"
-                          gutterBottom
-                          variant="h5"
-                          style={{ color: '#FFC83D' }}
-                        >
-                          {ub.TemplateCenter}
-                        </Typography>
-                      </Grid>
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h5"
+                          >
+                            Center:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h5"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateCenter}
+                          </Typography>
+                        </Grid>
 
-                      <Grid
-                        lg={6}
-                        sm={6}
-                        xl={6}
-                        xs={12}
-                        container
-                        justify="space-between"
-                        style={{ padding: '0.5rem' }}
-                      >
-                        <Typography
-                          color="textSecondary"
-                          gutterBottom
-                          variant="h6"
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
                         >
-                          Roll Conv:
-                        </Typography>
-                        <Typography
-                          color="textPrimary"
-                          gutterBottom
-                          variant="h6"
-                          style={{ color: '#FFC83D' }}
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            Roll Conv:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h6"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateRollConvention}
+                          </Typography>
+                        </Grid>
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
                         >
-                          {ub.TemplateRollConvention}
-                        </Typography>
-                      </Grid>
-                      <Grid
-                        lg={6}
-                        sm={6}
-                        xl={6}
-                        xs={12}
-                        container
-                        justify="space-between"
-                        style={{ padding: '0.5rem' }}
-                      >
-                        <Typography
-                          color="textSecondary"
-                          gutterBottom
-                          variant="h5"
-                        >
-                          Every:
-                        </Typography>
-                        <Typography
-                          color="textPrimary"
-                          gutterBottom
-                          variant="h5"
-                          style={{ color: '#FFC83D' }}
-                        >
-                          {ub.TemplateEvery}
-                        </Typography>
-                      </Grid>
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h5"
+                          >
+                            Every:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h5"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateEvery}
+                          </Typography>
+                        </Grid>
 
-                      <Grid
-                        lg={6}
-                        sm={6}
-                        xl={6}
-                        xs={12}
-                        container
-                        justify="space-between"
-                        style={{ padding: '0.5rem' }}
-                      >
-                        <Typography
-                          color="textSecondary"
-                          gutterBottom
-                          variant="h6"
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
                         >
-                          Occur:
-                        </Typography>
-                        <Typography
-                          color="textPrimary"
-                          gutterBottom
-                          variant="h6"
-                          style={{ color: '#FFC83D' }}
-                        >
-                          {ub.TemplateOccurance}
-                        </Typography>
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            Occur:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h6"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateOccurance}
+                          </Typography>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </Paper>
-                </div>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-        );
-      })}
-    </Card>
-  );
-};
+                    </Paper>
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+            </div>
+          );
+        })}
+      </Card>
+    );
+  }
+}
+// const TemplateList2 = ({ className, ...rest }) => {
+//   const classes = useStyles();
+
+//   let hidingOn = useState(false);
+
+//   const [expanded, setExpanded] = React.useState(false);
+
+//   const handleChange = (panel) => (event, isExpanded) => {
+//     setExpanded(isExpanded ? panel : false);
+//   };
+
+//   return (
+//     <Card>
+//       <CardHeader
+//         // subheader="The information can be edited"
+//         title="Template Listing"
+//       />
+//       <Divider />
+//       {data.map((ub) => {
+//         return (
+//           <div>
+//             <Accordion
+//               expanded={expanded === ub.TemplateName}
+//               onChange={handleChange(ub.TemplateName)}
+//             >
+//               <AccordionSummary
+//                 // expandIcon={<ExpandMoreIcon />}
+//                 aria-controls="panel1bh-content"
+//                 id="panel1bh-header"
+//               >
+//                 <Grid item lg={12} sm={12} xl={12} xs={12}>
+//                   <CardContent
+//                     style={{
+//                       paddingBottom: '0px',
+//                       paddingTop: '0px',
+//                       paddingLeft: '0.5rem',
+//                       paddingRight: '0.5rem'
+//                     }}
+//                   >
+//                     <Grid container justify="space-between" spacing={1}>
+//                       <Grid item lg={6} sm={6} xl={6} xs={6}>
+//                         <Typography
+//                           color="textPrimary"
+//                           gutterBottom
+//                           variant="h4"
+//                         >
+//                           <span style={{ color: '#FFC83D' }}>
+//                             {ub.TemplateType}
+//                           </span>
+//                           {' for '}
+//                           {ub.TemplateName}
+//                         </Typography>
+//                         <Typography
+//                           color="textSecondary"
+//                           gutterBottom
+//                           variant="h6"
+//                         >
+//                           {ub.TemplateStatus}
+//                         </Typography>
+//                       </Grid>
+//                       <Grid
+//                         item
+//                         lg={6}
+//                         sm={6}
+//                         xl={6}
+//                         xs={6}
+//                         className={classes.right}
+//                       >
+//                         <Typography
+//                           color="textPrimary"
+//                           gutterBottom
+//                           variant="h4"
+//                         >
+//                           {ub.TemplateCurrency}{' '}
+//                           {ub.TemplateAmount.toLocaleString(undefined, {
+//                             maximumFractionDigits: 2
+//                           })}
+//                         </Typography>
+//                         <Typography
+//                           color="textSecondary"
+//                           gutterBottom
+//                           variant="h6"
+//                         >
+//                           {ub.TemplateDate}
+//                         </Typography>
+//                       </Grid>
+//                     </Grid>
+//                   </CardContent>
+//                 </Grid>
+//               </AccordionSummary>
+
+//               <AccordionDetails>
+//                 <div className={classes.divFullWidth}>
+//                   <Paper className={classes.paper}>
+//                     <Grid container lg={12} sm={12} xl={12} xs={12} spacing={2}>
+//                       {/* <Grid container justify="space-between" spacing={2}> */}
+//                       <Grid
+//                         lg={6}
+//                         sm={6}
+//                         xl={6}
+//                         xs={12}
+//                         container
+//                         justify="space-between"
+//                         style={{ padding: '0.5rem' }}
+//                       >
+//                         <Typography
+//                           color="textSecondary"
+//                           gutterBottom
+//                           variant="h5"
+//                         >
+//                           Generate:
+//                         </Typography>
+//                         <Typography
+//                           color="textPrimary"
+//                           gutterBottom
+//                           variant="h5"
+//                           style={{ color: '#FFC83D' }}
+//                         >
+//                           {ub.TemplateGen}
+//                         </Typography>
+//                       </Grid>
+
+//                       <Grid
+//                         lg={6}
+//                         sm={6}
+//                         xl={6}
+//                         xs={12}
+//                         container
+//                         justify="space-between"
+//                         style={{ padding: '0.5rem' }}
+//                       >
+//                         <Typography
+//                           color="textSecondary"
+//                           gutterBottom
+//                           variant="h5"
+//                         >
+//                           CcyPair:
+//                         </Typography>
+//                         <Typography
+//                           color="textPrimary"
+//                           gutterBottom
+//                           variant="h5"
+//                           style={{ color: '#FFC83D' }}
+//                         >
+//                           {ub.TemplatePair}
+//                         </Typography>
+//                       </Grid>
+//                       <Grid
+//                         lg={6}
+//                         sm={6}
+//                         xl={6}
+//                         xs={12}
+//                         container
+//                         justify="space-between"
+//                         style={{ padding: '0.5rem' }}
+//                       >
+//                         <Typography
+//                           color="textSecondary"
+//                           gutterBottom
+//                           variant="h5"
+//                         >
+//                           Center:
+//                         </Typography>
+//                         <Typography
+//                           color="textPrimary"
+//                           gutterBottom
+//                           variant="h5"
+//                           style={{ color: '#FFC83D' }}
+//                         >
+//                           {ub.TemplateCenter}
+//                         </Typography>
+//                       </Grid>
+
+//                       <Grid
+//                         lg={6}
+//                         sm={6}
+//                         xl={6}
+//                         xs={12}
+//                         container
+//                         justify="space-between"
+//                         style={{ padding: '0.5rem' }}
+//                       >
+//                         <Typography
+//                           color="textSecondary"
+//                           gutterBottom
+//                           variant="h6"
+//                         >
+//                           Roll Conv:
+//                         </Typography>
+//                         <Typography
+//                           color="textPrimary"
+//                           gutterBottom
+//                           variant="h6"
+//                           style={{ color: '#FFC83D' }}
+//                         >
+//                           {ub.TemplateRollConvention}
+//                         </Typography>
+//                       </Grid>
+//                       <Grid
+//                         lg={6}
+//                         sm={6}
+//                         xl={6}
+//                         xs={12}
+//                         container
+//                         justify="space-between"
+//                         style={{ padding: '0.5rem' }}
+//                       >
+//                         <Typography
+//                           color="textSecondary"
+//                           gutterBottom
+//                           variant="h5"
+//                         >
+//                           Every:
+//                         </Typography>
+//                         <Typography
+//                           color="textPrimary"
+//                           gutterBottom
+//                           variant="h5"
+//                           style={{ color: '#FFC83D' }}
+//                         >
+//                           {ub.TemplateEvery}
+//                         </Typography>
+//                       </Grid>
+
+//                       <Grid
+//                         lg={6}
+//                         sm={6}
+//                         xl={6}
+//                         xs={12}
+//                         container
+//                         justify="space-between"
+//                         style={{ padding: '0.5rem' }}
+//                       >
+//                         <Typography
+//                           color="textSecondary"
+//                           gutterBottom
+//                           variant="h6"
+//                         >
+//                           Occur:
+//                         </Typography>
+//                         <Typography
+//                           color="textPrimary"
+//                           gutterBottom
+//                           variant="h6"
+//                           style={{ color: '#FFC83D' }}
+//                         >
+//                           {ub.TemplateOccurance}
+//                         </Typography>
+//                       </Grid>
+//                     </Grid>
+//                   </Paper>
+//                 </div>
+//               </AccordionDetails>
+//             </Accordion>
+//           </div>
+//         );
+//       })}
+//     </Card>
+//   );
+// };
 
 TemplateList.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
 };
-
-export default TemplateList;
+// export default TemplateList;
+export default withStyles(styles, { withTheme: true })(TemplateList);

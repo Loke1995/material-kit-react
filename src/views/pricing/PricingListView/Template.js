@@ -89,7 +89,9 @@ class Template extends React.Component {
     super(props);
     this.state = {
       moreOption: false,
-      createTemplate: false
+      createTemplate: false,
+      templateName: this.props.templateName,
+      templateType: this.props.templateType
     };
     this.createTemplate = this.createTemplate.bind(this);
     this.moreOptions = this.moreOptions.bind(this);
@@ -134,6 +136,7 @@ class Template extends React.Component {
                           required
                           variant="outlined"
                           key={option.FieldPlaceHolder}
+                          // placeholder={this.state.templateName}
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
