@@ -43,11 +43,12 @@ class PricingListView extends React.Component {
         <Grid item lg={6} sm={6} xl={6} xs={12}>
         </Grid>
       </Grid> */}
-
+          {/* <h1>{this.state.templateType}</h1> */}
           <Grid container spacing={2}>
             <Grid item lg={6} sm={6} xl={6} xs={12}>
               {/* {this.state.templateListLoadID === '1' ? ( */}
               <Template
+                name={'Geek'}
                 templateName={this.state.templateName}
                 templateType={this.state.templateType}
                 // templateData={

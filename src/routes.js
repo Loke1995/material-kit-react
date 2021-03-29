@@ -6,6 +6,7 @@ import AccountView from '/src/views/account/AccountView';
 import PricingListView from '/src/views/pricing/PricingListView';
 import DashboardView from '/src/views/reports/DashboardView';
 import LoginView from '/src/views/auth/LoginView';
+// import LoginView from '/src/components/login.component';
 import NotFoundView from '/src/views/errors/NotFoundView';
 import ProductListView from '/src/views/product/ProductListView';
 import RegisterView from '/src/views/auth/RegisterView';

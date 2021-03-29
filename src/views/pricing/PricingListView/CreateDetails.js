@@ -156,7 +156,9 @@ class CreateDetails extends React.Component {
     this.state = {
       dataPV: data,
       pricingV: true,
-      fxspot: 4.1057
+      fxspot: 4.1057,
+      templateName: this.props.templateName,
+      templateType: this.props.templateType
     };
     this.hideButton = this.hideButton.bind(this);
     this.updateFXSpot = this.updateFXSpot.bind(this);
@@ -184,6 +186,10 @@ class CreateDetails extends React.Component {
   //   });
   // };
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return true;
+  // }
+
   render() {
     const { classes } = this.props;
     const { fxspot, pricingV } = this.state;
@@ -196,6 +202,7 @@ class CreateDetails extends React.Component {
               title="Create Details"
             />
             <Divider />
+            {/* <h1>{this.props.templateName}</h1> */}
             <CardContent>
               <Grid container spacing={3}>
                 <Grid item md={6} xs={12}>
@@ -299,11 +306,12 @@ class CreateDetails extends React.Component {
                     required
                     variant="outlined"
                     key="SalesDGN"
-                    placeholder="INTERBANK"
+                    // placeholder="INTERBANK"
+                    placeholder={this.state.templateName}
                     InputLabelProps={{ shrink: true }}
                   />
                 </Grid>
-
+                {/* {alert(this.state.templateName)} */}
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth

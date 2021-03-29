@@ -89,9 +89,7 @@ class Template extends React.Component {
     super(props);
     this.state = {
       moreOption: false,
-      createTemplate: false,
-      templateName: this.props.templateName,
-      templateType: this.props.templateType
+      createTemplate: false
     };
     this.createTemplate = this.createTemplate.bind(this);
     this.moreOptions = this.moreOptions.bind(this);
@@ -114,7 +112,10 @@ class Template extends React.Component {
     const { createTemplate, moreOption } = this.state;
 
     return createTemplate ? (
-      <CreateDetails />
+      <CreateDetails
+        templateName={this.props.templateName}
+        templateType={this.props.templateType}
+      />
     ) : (
       <div className={classes.root}>
         <form autoComplete="off" noValidate className={classes.root}>
@@ -125,6 +126,8 @@ class Template extends React.Component {
             />
             <Divider />
             <CardContent>
+              {/* <h1>{this.props.templateType} 123</h1> */}
+
               <Grid container spacing={3}>
                 {templateData.map(function (option) {
                   if (option.FieldType === 'text') {
@@ -137,6 +140,7 @@ class Template extends React.Component {
                           variant="outlined"
                           key={option.FieldPlaceHolder}
                           // placeholder={this.state.templateName}
+                          placeholder={classes.templateName}
                           InputLabelProps={{ shrink: true }}
                         />
                       </Grid>
