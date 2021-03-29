@@ -7,6 +7,18 @@ import '/src/mixins/chartjs';
 import theme from '/src/theme';
 import routes from '/src/routes';
 
+// class App extends React.Component {
+//   render() {
+//     const { routing } = this.props;
+
+//     return (
+//       <ThemeProvider theme={theme}>
+//         <GlobalStyles />
+//         {routing}
+//       </ThemeProvider>
+//     );
+//   }
+// }
 const App = () => {
   const routing = useRoutes(routes);
 

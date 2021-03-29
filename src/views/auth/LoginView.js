@@ -17,20 +17,8 @@ import GoogleIcon from '/src/icons/Google';
 import Page from '/src/components/Page';
 
 import Form from 'react-validation/build/form';
-import Input from 'react-validation/build/input';
-import CheckButton from 'react-validation/build/button';
 import { withStyles } from '@material-ui/styles';
 import AuthService from '../../services/auth.service';
-
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
 
 const styles = (theme) => ({
   root: {
@@ -78,31 +66,40 @@ class LoginView extends React.Component {
 
     this.form.validateAll();
 
-    if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
-        () => {
-          this.props.history.push('/profile');
-          window.location.reload();
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+    // if (this.checkBtn.context._errors.length === 0) {
+    AuthService.login(this.state.username, this.state.password).then(
+      () => {
+        this.props.history.push('/app/dashboard');
+        window.location.reload();
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
 
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
-        }
-      );
-    } else {
-      this.setState({
-        loading: false
-      });
-    }
+        // this.setState({
+        //   loading: false,
+        //   message: resMessage
+        // });
+
+        alert(resMessage);
+
+        this.setState({
+          username: '',
+          password: '',
+          loading: false,
+          message: ''
+        });
+      }
+    );
+    // } else {
+    //   this.setState({
+    //     loading: false
+    //   });
+    // }
   }
 
   render() {
@@ -116,62 +113,149 @@ class LoginView extends React.Component {
           justifyContent="center"
         >
           <Container maxWidth="sm">
-            <Form
-              onSubmit={this.handleLogin}
-              ref={(c) => {
-                this.form = c;
-              }}
+            <Formik
+              initialValues={
+                {
+                  // email: 'demo@devias.io',
+                  // password: 'Password123'
+                }
+              }
+              validationSchema={Yup.object().shape({
+                email: Yup.string()
+                  .email('Must be a valid email')
+                  .max(255)
+                  .required('Email is required'),
+                password: Yup.string().max(255).required('Password is required')
+              })}
+              // onSubmit={() => {
+              //   navigate('/app/dashboard', { replace: true });
+              // }}
             >
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <Input
-                  type="text"
-                  className="form-control"
-                  name="username"
-                  value={this.state.username}
-                  onChange={this.onChangeUsername}
-                  validations={[required]}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <Input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.onChangePassword}
-                  validations={[required]}
-                />
-              </div>
-
-              <div className="form-group">
-                <button
-                  className="btn btn-primary btn-block"
-                  disabled={this.state.loading}
+              {({
+                errors,
+                handleBlur,
+                handleChange,
+                handleSubmit,
+                isSubmitting,
+                touched,
+                values
+              }) => (
+                <Form
+                  onSubmit={this.handleLogin}
+                  ref={(c) => {
+                    this.form = c;
+                  }}
                 >
-                  {this.state.loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
-                  <span>Login</span>
-                </button>
-              </div>
+                  <Box mb={3}>
+                    <Typography color="textPrimary" variant="h2">
+                      Sign in
+                    </Typography>
+                    {/* <Typography
+                      color="textSecondary"
+                      gutterBottom
+                      variant="body2"
+                    >
+                      Sign in on the internal platform
+                    </Typography> */}
+                  </Box>
 
-              {this.state.message && (
-                <div className="form-group">
-                  <div className="alert alert-danger" role="alert">
-                    {this.state.message}
+                  <TextField
+                    error={Boolean(touched.email && errors.email)}
+                    fullWidth
+                    helperText={touched.email && errors.email}
+                    label="Email Address"
+                    margin="normal"
+                    name="email"
+                    // onBlur={handleBlur}
+                    onChange={this.onChangeUsername}
+                    type="email"
+                    // value={values.email}
+                    variant="outlined"
+                    required
+                  />
+
+                  <TextField
+                    error={Boolean(touched.password && errors.password)}
+                    fullWidth
+                    helperText={touched.password && errors.password}
+                    label="Password"
+                    margin="normal"
+                    name="password"
+                    // onBlur={handleBlur}
+                    onChange={this.onChangePassword}
+                    type="password"
+                    // value={values.password}
+                    variant="outlined"
+                    required
+                  />
+                  <Box my={2}>
+                    <Button
+                      color="primary"
+                      disabled={this.state.loading}
+                      fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                      ref={(c) => {
+                        this.checkBtn = c;
+                      }}
+                    >
+                      SIGN IN
+                    </Button>
+                  </Box>
+
+                  {/* <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <Input
+                      type="text"
+                      className="form-control"
+                      name="username"
+                      value={this.state.username}
+                      onChange={this.onChangeUsername}
+                      validations={[required]}
+                    />
                   </div>
-                </div>
+
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <Input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.onChangePassword}
+                      validations={[required]}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <button
+                      className="btn btn-primary btn-block"
+                      disabled={this.state.loading}
+                    >
+                      {this.state.loading && (
+                        <span className="spinner-border spinner-border-sm"></span>
+                      )}
+                      <span>Login</span>
+                    </button>
+                  </div>
+
+                  {this.state.message && (
+                    <div className="form-group">
+                      <div className="alert alert-danger" role="alert">
+                        {this.state.message}
+                      </div>
+                    </div>
+                  )}
+                  <CheckButton
+                    style={{ display: 'none' }}
+                    ref={(c) => {
+                      this.checkBtn = c;
+                    }}
+                  /> */}
+                </Form>
               )}
-              <CheckButton
-                style={{ display: 'none' }}
-                ref={(c) => {
-                  this.checkBtn = c;
-                }}
-              />
-            </Form>
+            </Formik>
           </Container>
         </Box>
       </Page>

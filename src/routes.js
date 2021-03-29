@@ -13,6 +13,7 @@ import RegisterView from '/src/views/auth/RegisterView';
 import SettingsView from '/src/views/settings/SettingsView';
 import MarketView from '/src/views/market/MarketView';
 import TradeView from '/src/views/trade/TradeView';
+import ProfileView from '/src/components/profile.component';
 
 const routes = [
   {
@@ -26,7 +27,8 @@ const routes = [
       { path: 'settings', element: <SettingsView /> },
       { path: 'market', element: <MarketView /> },
       { path: 'trade', element: <TradeView /> },
-      { path: '*', element: <Navigate to="/404" /> }
+      { path: '*', element: <Navigate to="/404" /> },
+      { path: 'profile', element: <ProfileView /> }
     ]
   },
   {
