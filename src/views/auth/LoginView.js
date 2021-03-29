@@ -1,5 +1,12 @@
 import React from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import {
+  Redirect,
+  Link as RouterLink,
+  useNavigate,
+  withRouter,
+  useHistory
+} from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
@@ -69,8 +76,7 @@ class LoginView extends React.Component {
     // if (this.checkBtn.context._errors.length === 0) {
     AuthService.login(this.state.username, this.state.password).then(
       () => {
-        this.props.history.push('/app/dashboard');
-        window.location.reload();
+        window.location.href = '/app/dashboard';
       },
       (error) => {
         const resMessage =
@@ -103,9 +109,14 @@ class LoginView extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
+
     return (
-      <Page className={classes.root} title="Login">
+      <Page
+        //  className={classes.root}
+        title="Login"
+        style={{ height: '100%' }}
+      >
         <Box
           display="flex"
           flexDirection="column"
@@ -403,4 +414,5 @@ class LoginView extends React.Component {
 //   );
 // };
 
-export default withStyles(styles, { withTheme: true })(LoginView);
+// export default withStyles(styles, { withTheme: true })(LoginView);
+export default LoginView;

@@ -146,6 +146,242 @@ const data = [
   }
 ];
 
+const data3 = {
+  'FXStructurePricingResponse::DELTA': -1588496.8722428496,
+  'FXStructurePricingResponse::DealDetails': [
+    [
+      'MYFOP_TR1',
+      'MYFOP_TR9',
+      'USD/MYR',
+      'U UP AND OUT',
+      'E European',
+      'B Buy',
+      'C Call',
+      '4.211500',
+      '4.217159',
+      'Continuous',
+      '4.226500',
+      '4.216500',
+      '1 Currency 1',
+      '1000000.000000',
+      '2 Currency 2',
+      '0.000000',
+      '05/08/2020',
+      '07/08/2020',
+      '07/09/2020',
+      '09/09/2020',
+      'Delivery',
+      '5.3317',
+      'BID',
+      '5.3317/5.3842/5.3317',
+      '',
+      '00:00:00',
+      '',
+      'PH',
+      'TRG',
+      'INTERBANK',
+      'Interbank Transaction',
+      '407.133334',
+      '1.000000'
+    ],
+    [
+      'MYFOP_TR1',
+      '03ANSH',
+      'USD/MYR',
+      'U UP AND OUT',
+      'E European',
+      'S Sell',
+      'C Call',
+      '4.211500',
+      '4.217159',
+      'Continuous',
+      '4.226500',
+      '4.216500',
+      '1 Currency 1',
+      '1000000.000000',
+      '2 Currency 2',
+      '0',
+      '05/08/2020',
+      '07/08/2020',
+      '07/09/2020',
+      '09/09/2020',
+      'Delivery',
+      '5.3317',
+      'BID',
+      '5.3317/5.3842/5.3317',
+      '',
+      '00:00:00',
+      '',
+      'PH',
+      'TRG',
+      'INTERBANK',
+      'Interbank Transaction',
+      '407.133334',
+      '1.000000'
+    ],
+    [
+      'MYFOP_TR1',
+      'MYFOP_TR9',
+      'USD/MYR',
+      'U UP AND OUT',
+      'E European',
+      'S Sell',
+      'P Put',
+      '4.211500',
+      '4.217159',
+      'Continuous',
+      '4.226500',
+      '4.216500',
+      '1 Currency 1',
+      '2000000.000000',
+      '2 Currency 2',
+      '23101.738340',
+      '05/08/2020',
+      '07/08/2020',
+      '07/09/2020',
+      '09/09/2020',
+      'Delivery',
+      '5.3317',
+      'BID',
+      '5.3317/5.3842/5.3317',
+      '',
+      '00:00:00',
+      '',
+      'PH',
+      'TRG',
+      'INTERBANK',
+      'Interbank Transaction',
+      '1588904.005577',
+      '1.000000'
+    ],
+    [
+      'MYFOP_TR1',
+      '03ANSH',
+      'USD/MYR',
+      'U UP AND OUT',
+      'E European',
+      'B Buy',
+      'P Put',
+      '4.211500',
+      '4.217159',
+      'Continuous',
+      '4.226500',
+      '4.216500',
+      '1 Currency 1',
+      '2000000.000000',
+      '2 Currency 2',
+      '0',
+      '05/08/2020',
+      '07/08/2020',
+      '07/09/2020',
+      '09/09/2020',
+      'Delivery',
+      '5.3317',
+      'BID',
+      '5.3317/5.3842/5.3317',
+      '',
+      '00:00:00',
+      '',
+      'PH',
+      'TRG',
+      'INTERBANK',
+      'Interbank Transaction',
+      '1588904.005577',
+      '1.000000'
+    ]
+  ],
+  'FXStructurePricingResponse::Diagnostic': '',
+  'FXStructurePricingResponse::Headers': [
+    'Folders_ShortName',
+    'Cpty_ShortName',
+    'Pairs_ShortName',
+    'PricingType',
+    'ExerciceType',
+    'DealType',
+    'OptionType',
+    'SpotRate',
+    'FwdRate',
+    'BarrierOvservation',
+    'Barrier',
+    'Strike',
+    'NotionalCcy',
+    'NotionalAmount1',
+    'PremiumPayment',
+    'PremiumAmount2',
+    'TradeDate',
+    'ValueDate',
+    'MaturityDate',
+    'DeliveryDate',
+    'SettlementMode',
+    'Volat',
+    'VolType',
+    'Bid/Mid/Ask Vol',
+    'Comments',
+    'Time',
+    'Cities_ShortName',
+    'Brokers_ShortName',
+    'BDBranchShortName',
+    'DGroupName',
+    'DSubGrpDesc',
+    'DeltaOpt',
+    'USDExchRate'
+  ],
+  'FXStructurePricingResponse::PV': 23101.7383395223,
+  'FXStructurePricingResponse::PricingDetails': [
+    ['Status', 'Successful on 2021-02-26 10:40:38'],
+    ['PV', '23,101.74 MYR'],
+    ['Delta', '(1,588,496.87) USD'],
+    ['Vega', '1,087.13 MYR']
+  ],
+  'FXStructurePricingResponse::Results': {
+    ObjectType: 'PricingResult',
+    'PricingResult::Children': [
+      [
+        '0',
+        {
+          ObjectType: 'PricingResult',
+          'PricingResult::ResultInfo': [
+            ['VolRule', 'BID'],
+            ['DigitalCharge', '300.000000']
+          ],
+          'PricingResult::Results': [
+            ['PV', -306.2993561856789],
+            ['Applied Vol', 0.05331736097971228],
+            ['Applied Rate', 0.000006310867611920498],
+            ['QUICKVEGA', 3.925044411999679],
+            ['QUICKDELTA', 407.1333342651373]
+          ]
+        }
+      ],
+      [
+        '1',
+        {
+          ObjectType: 'PricingResult',
+          'PricingResult::ResultInfo': [['VolRule', 'BID']],
+          'PricingResult::Results': [
+            ['PV', 23408.03769570798],
+            ['Applied Vol', 0.05331736097971228],
+            ['Applied Rate', 0.011725406739830753],
+            ['QUICKVEGA', 1083.2007758072123],
+            ['QUICKDELTA', -1588904.0055771146]
+          ]
+        }
+      ]
+    ],
+    'PricingResult::ResultInfo': [['SwapRule', 'ASK']],
+    'PricingResult::Results': [
+      ['PV', 23101.7383395223],
+      ['Applied Vol', 0.10663472195942456],
+      ['Applied Rate', 0.011731717607442673],
+      ['QUICKVEGA', 1087.1258202192118],
+      ['QUICKDELTA', -1588496.8722428496]
+    ]
+  },
+  'FXStructurePricingResponse::Status': '',
+  'FXStructurePricingResponse::VEGA': 1087.1258202192118,
+  ObjectType: 'FXStructurePricingResponse'
+};
+
 function resetForm() {
   alert('Great Shot!');
 }
@@ -163,6 +399,85 @@ class CreateDetails extends React.Component {
     this.hideButton = this.hideButton.bind(this);
     this.updateFXSpot = this.updateFXSpot.bind(this);
   }
+
+  renderPricing = () => {
+    var arr = [];
+    Object.keys(data3).forEach(function (key) {
+      arr.push(data3[key]);
+    });
+
+
+
+
+    return data3.['FXStructurePricingResponse::Headers'].map((item, index) => (
+      <Grid item md={6} xs={12}>
+          <TextField
+            fullWidDataTransferItemList
+            label={item}
+            required
+            variant="outlined"
+            value={data3.['FXStructurePricingResponse::DealDetails'][0][index]}
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+    ))
+
+
+    for (var key in data3.['FXStructurePricingResponse::Headers']) {
+      return (
+        <Grid item md={6} xs={12}>
+          <TextField
+            fullWidth
+            label={data3.['FXStructurePricingResponse::Headers'][key]}
+            required
+            variant="outlined"
+            value={data3.['FXStructurePricingResponse::Headers'][key]}
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+      );
+    }
+
+
+    return (
+      <Grid item md={6} xs={12}>
+        <TextField
+          fullWidth
+          label={data3.['FXStructurePricingResponse::Headers'].length}
+          required
+          variant="outlined"
+          value={data3.['FXStructurePricingResponse::Headers']}
+          InputLabelProps={{ shrink: true }}
+        />
+      </Grid>
+    );
+    // return (
+    //   <Grid item md={6} xs={12}>
+    //     <TextField
+    //       fullWidth
+    //       label={data3.['FXStructurePricingResponse::VEGA']}
+    //       required
+    //       variant="outlined"
+    //       InputLabelProps={{ shrink: true }}
+    //     />
+    //   </Grid>
+    // );
+    // var ret;
+    // for (var key in data3) {
+    //   ret += (
+    //     <Grid item md={6} xs={12}>
+    //       <TextField
+    //         fullWidth
+    //         label={key}
+    //         required
+    //         variant="outlined"
+    //         InputLabelProps={{ shrink: true }}
+    //       />
+    //     </Grid>
+    //   );
+    // }
+    // return ret;
+  };
 
   hideButton(item) {
     this.setState({
@@ -561,6 +876,18 @@ class CreateDetails extends React.Component {
               )}
             </CardContent>
 
+            <CardContent>
+              {this.renderPricing()}
+              <TextField
+                fullWidth
+                label={data3.ObjectType}
+                required
+                variant="outlined"
+                key="SalesBDSN"
+                placeholder="Default"
+                InputLabelProps={{ shrink: true }}
+              />
+            </CardContent>
             {/* <CardContent>
               {data2.map(function (ub) {
                 return (

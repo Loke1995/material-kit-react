@@ -4,6 +4,8 @@ import Page from '/src/components/Page';
 import Template from './Template';
 import TemplateList from './TemplateList';
 import FXSpot from './FXSpotList';
+
+import PricingList from './PricingList';
 import PropTypes from 'prop-types';
 
 // const useStyles = makeStyles((theme) => ({
@@ -71,7 +73,13 @@ class PricingListView extends React.Component {
               <FXSpot />
             </Grid>
             <Grid item lg={6} sm={6} xl={6} xs={12}>
-              {/* <FXSpot /> */}
+              {/* <PricingList /> */}
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={2}>
+            <Grid item lg={12} sm={12} xl={12} xs={12}>
+              <PricingList />
             </Grid>
           </Grid>
 

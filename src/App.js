@@ -6,6 +6,7 @@ import GlobalStyles from '/src/components/GlobalStyles';
 import '/src/mixins/chartjs';
 import theme from '/src/theme';
 import routes from '/src/routes';
+import { Navigate } from 'react-router-dom';
 
 // class App extends React.Component {
 //   render() {
@@ -19,14 +20,34 @@ import routes from '/src/routes';
 //     );
 //   }
 // }
+
+// function App() {
+//   const { isLoggedIn } = useSelector((state) => state.auth);
+
+//   const routing = useRoutes(routes(isLoggedIn));
+
+//   return (
+//     (
+//       <ThemeProvider theme={theme}>
+//         <GlobalStyles />
+//         {routing}
+//       </ThemeProvider>
+//     ) || <Navigate to="/404" />
+//   );
+// }
+
 const App = () => {
+  // const { isLoggedIn } = useSelector((state) => state.auth);
+  // const routing = useRoutes(routes(isLoggedIn));
   const routing = useRoutes(routes);
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {routing}
-    </ThemeProvider>
+    (
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        {routing}
+      </ThemeProvider>
+    ) || <Navigate to="/404" />
   );
 };
 
