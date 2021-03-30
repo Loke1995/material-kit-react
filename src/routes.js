@@ -49,11 +49,13 @@ class routes extends React.Component {
   render() {
     return (
       <Routes>
-        <Route path="/" element={<MainLayout />} />
-        <Route path="login" element={<LoginView />} />
-        <Route path="register" element={<LoginView />} />
-        <Route path="*" element={<LoginView />} />
-        <Route path="404" element={<Navigate to="/404" />} />
+        <Route path="" element={<MainLayout />}>
+          <Route path="/" element={<LoginView />} />
+          <Route path="login" element={<LoginView />} />
+          <Route path="register" element={<LoginView />} />
+          <Route path="*" element={<LoginView />} />
+          <Route path="404" element={<Navigate to="/404" />} />
+        </Route>
         {sessionStorage.getItem('user') ? (
           <Route path="app" element={<DashboardLayout />}>
             <Route path="/" element={<DashboardView />} />
