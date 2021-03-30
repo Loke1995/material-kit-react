@@ -247,6 +247,9 @@ const BucketList = ({ className, ...rest }) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  let user = JSON.parse(sessionStorage.getItem('user'));
+  const token = user.data.id;
+
   return (
     <Card>
       <CardHeader

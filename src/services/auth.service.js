@@ -1,6 +1,7 @@
 import axios from 'axios';
-
-const API_URL = 'http://localhost:8080/api/auth/';
+import { endpoint } from '../api/index.js';
+// const API_URL = 'http://localhost:8080/api/auth/';
+const API_URL = endpoint.urlEndPoint + '/api/auth/';
 
 export const alertConstants = {
   SUCCESS: 'ALERT_SUCCESS',
@@ -10,23 +11,22 @@ export const alertConstants = {
 
 class AuthService {
   login(username, password) {
-    // return axios
-    //   .post(API_URL + 'signin', {
-    //     username,
-    //     password
-    //   })
-    //   .then((response) => {
-    //     if (response.data.accessToken) {
-    //       localStorage.setItem('user', JSON.stringify(response.data));
-    //     }
+    return axios
+      .post(API_URL + 'signin', {
+        username,
+        password
+      })
+      .then((response) => {
+        if (response.data.accessToken) {
+          sessionStorage.setItem('user', JSON.stringify(response.data));
+        }
 
-    //     return response.data;
-    //   });
-    return { token: '123' };
+        return response.data;
+      });
   }
 
   logout() {
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
   }
 
   register(username, email, password) {
@@ -38,7 +38,7 @@ class AuthService {
   }
 
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(sessionStorage.getItem('user'));
   }
 }
 

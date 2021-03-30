@@ -400,84 +400,81 @@ class CreateDetails extends React.Component {
     this.updateFXSpot = this.updateFXSpot.bind(this);
   }
 
-  renderPricing = () => {
-    var arr = [];
-    Object.keys(data3).forEach(function (key) {
-      arr.push(data3[key]);
-    });
+  // renderPricing = () => {
+  //   var arr = [];
+  //   Object.keys(data3).forEach(function (key) {
+  //     arr.push(data3[key]);
+  //   });
 
+  //   return data3.['FXStructurePricingResponse::Headers'].map((item, index) => (
+  //     <Grid item md={6} xs={12}>
+  //         <TextField
+  //           fullWidDataTransferItemList
+  //           label={item}
+  //           required
+  //           variant="outlined"
+  //           value={data3.['FXStructurePricingResponse::DealDetails'][0][index]}
+  //           InputLabelProps={{ shrink: true }}
+  //         />
+  //       </Grid>
+  //   ))
 
+  //   for (var key in data3.['FXStructurePricingResponse::Headers']) {
+  //     return (
+  //       <Grid item md={6} xs={12}>
+  //         <TextField
+  //           fullWidth
+  //           label={data3.['FXStructurePricingResponse::Headers'][key]}
+  //           required
+  //           variant="outlined"
+  //           value={data3.['FXStructurePricingResponse::Headers'][key]}
+  //           InputLabelProps={{ shrink: true }}
+  //         />
+  //       </Grid>
+  //     );
+  //   }
 
+  //   return (
+  //     <Grid item md={6} xs={12}>
+  //       <TextField
+  //         fullWidth
+  //         label={data3.['FXStructurePricingResponse::Headers'].length}
+  //         required
+  //         variant="outlined"
+  //         value={data3.['FXStructurePricingResponse::Headers']}
+  //         InputLabelProps={{ shrink: true }}
+  //       />
+  //     </Grid>
+  //   );
 
-    return data3.['FXStructurePricingResponse::Headers'].map((item, index) => (
-      <Grid item md={6} xs={12}>
-          <TextField
-            fullWidDataTransferItemList
-            label={item}
-            required
-            variant="outlined"
-            value={data3.['FXStructurePricingResponse::DealDetails'][0][index]}
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-    ))
+  // return (
+  //   <Grid item md={6} xs={12}>
+  //     <TextField
+  //       fullWidth
+  //       label={data3.['FXStructurePricingResponse::VEGA']}
+  //       required
+  //       variant="outlined"
+  //       InputLabelProps={{ shrink: true }}
+  //     />
+  //   </Grid>
+  // );
+  // var ret;
+  // for (var key in data3) {
+  //   ret += (
+  //     <Grid item md={6} xs={12}>
+  //       <TextField
+  //         fullWidth
+  //         label={key}
+  //         required
+  //         variant="outlined"
+  //         InputLabelProps={{ shrink: true }}
+  //       />
+  //     </Grid>
+  //   );
+  // }
+  // return ret;
 
-
-    for (var key in data3.['FXStructurePricingResponse::Headers']) {
-      return (
-        <Grid item md={6} xs={12}>
-          <TextField
-            fullWidth
-            label={data3.['FXStructurePricingResponse::Headers'][key]}
-            required
-            variant="outlined"
-            value={data3.['FXStructurePricingResponse::Headers'][key]}
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-      );
-    }
-
-
-    return (
-      <Grid item md={6} xs={12}>
-        <TextField
-          fullWidth
-          label={data3.['FXStructurePricingResponse::Headers'].length}
-          required
-          variant="outlined"
-          value={data3.['FXStructurePricingResponse::Headers']}
-          InputLabelProps={{ shrink: true }}
-        />
-      </Grid>
-    );
-    // return (
-    //   <Grid item md={6} xs={12}>
-    //     <TextField
-    //       fullWidth
-    //       label={data3.['FXStructurePricingResponse::VEGA']}
-    //       required
-    //       variant="outlined"
-    //       InputLabelProps={{ shrink: true }}
-    //     />
-    //   </Grid>
-    // );
-    // var ret;
-    // for (var key in data3) {
-    //   ret += (
-    //     <Grid item md={6} xs={12}>
-    //       <TextField
-    //         fullWidth
-    //         label={key}
-    //         required
-    //         variant="outlined"
-    //         InputLabelProps={{ shrink: true }}
-    //       />
-    //     </Grid>
-    //   );
-    // }
-    // return ret;
-  };
+  // };
 
   hideButton(item) {
     this.setState({
@@ -876,7 +873,7 @@ class CreateDetails extends React.Component {
               )}
             </CardContent>
 
-            <CardContent>
+            {/* <CardContent>
               {this.renderPricing()}
               <TextField
                 fullWidth
@@ -887,7 +884,8 @@ class CreateDetails extends React.Component {
                 placeholder="Default"
                 InputLabelProps={{ shrink: true }}
               />
-            </CardContent>
+            </CardContent> */}
+
             {/* <CardContent>
               {data2.map(function (ub) {
                 return (

@@ -8,6 +8,8 @@ import theme from '/src/theme';
 import routes from '/src/routes';
 import { Navigate } from 'react-router-dom';
 
+import Router from './routes';
+
 // class App extends React.Component {
 //   render() {
 //     const { routing } = this.props;
@@ -39,13 +41,14 @@ import { Navigate } from 'react-router-dom';
 const App = () => {
   // const { isLoggedIn } = useSelector((state) => state.auth);
   // const routing = useRoutes(routes(isLoggedIn));
-  const routing = useRoutes(routes);
+  // const routing = useRoutes(routes);
 
   return (
     (
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        {routing}
+        {/* {routing} */}
+        <Router />
       </ThemeProvider>
     ) || <Navigate to="/404" />
   );
