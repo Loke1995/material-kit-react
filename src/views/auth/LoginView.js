@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Redirect,
   Link as RouterLink,
@@ -49,6 +49,17 @@ class LoginView extends React.Component {
       loading: false,
       message: ''
     };
+
+    if (sessionStorage.getItem('user')) {
+      sessionStorage.removeItem('user');
+
+      // this.props.navigate('app/dashboard');
+      // this.props.history.push('/app/dashboard');
+    }
+  }
+
+  navigateDetails() {
+    this.props.navigation.navigate('/app/dashboard');
   }
 
   onChangeUsername(e) {
@@ -73,9 +84,18 @@ class LoginView extends React.Component {
 
     this.form.validateAll();
 
+    // sessionStorage.setItem('user', '123');
+    // window.location.href = '/app/dashboard';
+
+    // () => {
+    //   this.props.navigate('app/dashboard');
+    // };
+
     // if (this.checkBtn.context._errors.length === 0) {
     AuthService.login(this.state.username, this.state.password).then(
       () => {
+        // this.props.history.push("/profile");
+        //   window.location.reload();
         window.location.href = '/app/dashboard';
       },
       (error) => {
@@ -85,12 +105,6 @@ class LoginView extends React.Component {
             error.response.data.message) ||
           error.message ||
           error.toString();
-
-        // this.setState({
-        //   loading: false,
-        //   message: resMessage
-        // });
-
         alert(resMessage);
 
         this.setState({
@@ -110,7 +124,6 @@ class LoginView extends React.Component {
 
   render() {
     // const { classes } = this.props;
-
     return (
       <Page
         //  className={classes.root}

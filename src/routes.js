@@ -46,6 +46,10 @@ import { Route, Routes } from 'react-router';
 // ];
 
 class routes extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+
   render() {
     return (
       <Routes>
@@ -67,7 +71,7 @@ class routes extends React.Component {
             <Route path="*" element={<DashboardView />} />
           </Route>
         ) : (
-          <Redirect to={{ pathname: '/login' }} />
+          <Navigate to="/login" />
         )}
       </Routes>
     );
