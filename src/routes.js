@@ -59,6 +59,7 @@ class routes extends React.Component {
           <Route path="register" element={<LoginView />} />
           <Route path="*" element={<LoginView />} />
           <Route path="404" element={<Navigate to="/404" />} />
+          <Route path="profile" element={<ProfileView />} />
         </Route>
         {sessionStorage.getItem('user') ? (
           <Route path="app" element={<DashboardLayout />}>
