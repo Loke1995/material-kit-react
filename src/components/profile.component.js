@@ -17,7 +17,10 @@ export default class Profile extends Component {
       <div className="container">
         <header className="jumbotron">
           <h3>
-            <strong>{currentUser.username}</strong> Profile
+            <strong>
+              {currentUser.username ? currentUser.username : 'Username Error'}
+            </strong>{' '}
+            Profile
           </h3>
         </header>
         <p>
