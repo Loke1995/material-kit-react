@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Container, makeStyles, Grid } from '@material-ui/core';
-import Page from '/src/components/Page';
+import Page from '../../../components/Page';
 import Template from './Template';
 import TemplateList from './TemplateList';
 import FXSpot from './FXSpotList';

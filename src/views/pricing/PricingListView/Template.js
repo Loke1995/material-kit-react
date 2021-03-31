@@ -80,6 +80,22 @@ const templateDataSecondPart = [
   }
 ];
 
+const data3 = {
+  'Test::stripsInfo': [
+    ['Generate', 'ExpiryDate', 'Delivery Date,Expiry Date'],
+    ['Frequency', 'Monthly', 'Weekly,Biweekly,Monthly,Bimonthly,Quarterly'],
+    [
+      'Every',
+      'Default',
+      'Default,Monday,Tuesday,WednesDay,Thursday,Friday,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,End of Month'
+    ],
+    ['Roll Convention', 'Modified Following', 'Modified Following'],
+    ['Occurrences', '6', ''],
+    ['Start Date', '31-Mar-21', ''],
+    ['End Date', '31-May-21', '']
+  ]
+};
+
 function resetForm() {
   alert('Great Shot!');
 }
@@ -200,6 +216,68 @@ class Template extends React.Component {
               </Grid>
               {/* <Divider /> */}
               <br />
+
+              {/* <Grid container spacing={3}>
+                {moreOption ? (
+                  data3['Test::stripsInfo'].map(function (option) {
+                    if (option.FieldType === 'text') {
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            label={option.FieldLabel}
+                            required
+                            variant="outlined"
+                            key={option.FieldPlaceHolder}
+                            InputLabelProps={{ shrink: true }}
+                          />
+                        </Grid>
+                      );
+                    } else if (option.FieldType === 'dropdown') {
+                      var dropdownlist = option.FieldPlaceHolder.split('|');
+
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            label={option.FieldLabel}
+                            name="state"
+                            required
+                            select
+                            SelectProps={{ native: true }}
+                            key={dropdownlist[0]}
+                            variant="outlined"
+                          >
+                            {dropdownlist.map((option) => (
+                              <option key={option} value={option}>
+                                {option}
+                              </option>
+                            ))}
+                          </TextField>
+                        </Grid>
+                      );
+                    } else if (option.FieldType === 'date') {
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            name="startDate"
+                            label={option.FieldLabel}
+                            required
+                            SelectProps={{ native: true }}
+                            variant="outlined"
+                            type="date"
+                            InputLabelProps={{ shrink: true }}
+                          />
+                        </Grid>
+                      );
+                    }
+                  })
+                ) : (
+                  <Box></Box>
+                )}
+              </Grid> */}
+
               <Grid container spacing={3}>
                 {moreOption ? (
                   templateDataSecondPart.map(function (option) {

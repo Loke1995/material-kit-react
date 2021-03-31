@@ -19,9 +19,9 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import FacebookIcon from '/src/icons/Facebook';
-import GoogleIcon from '/src/icons/Google';
-import Page from '/src/components/Page';
+// import FacebookIcon from '/src/icons/Facebook';
+// import GoogleIcon from '/src/icons/Google';
+import Page from '../../components/Page';
 
 import Form from 'react-validation/build/form';
 import { withStyles } from '@material-ui/styles';
