@@ -4,7 +4,8 @@ import {
   Link as RouterLink,
   useNavigate,
   withRouter,
-  useHistory
+  useHistory,
+  Navigate
 } from 'react-router-dom';
 import { browserHistory } from 'react-router';
 import * as Yup from 'yup';
@@ -47,12 +48,12 @@ class LoginView extends React.Component {
       username: '',
       password: '',
       loading: false,
-      message: ''
+      message: '',
+      loggedIn: sessionStorage.getItem('user') === 'true'
     };
 
     if (sessionStorage.getItem('user')) {
-      sessionStorage.removeItem('user');
-
+      // sessionStorage.removeItem('user');
       // this.props.navigate('app/dashboard');
       // this.props.history.push('/app/dashboard');
     }
@@ -92,29 +93,56 @@ class LoginView extends React.Component {
     // };
 
     // if (this.checkBtn.context._errors.length === 0) {
-    AuthService.login(this.state.username, this.state.password).then(
-      () => {
-        // this.props.history.push("/profile");
-        //   window.location.reload();
-        window.location.href = '/app/dashboard';
-      },
-      (error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        alert(resMessage);
+    if (this.state.username === 'dealer') {
+      const jsonData = {
+        id: 1,
+        username: 'test',
+        roles: ['ROLE_MODERATOR'],
+        tokenType: 'Bearer',
+        accessToken: 'tyruteirnoimpfkfjhdegyurfmlknjheujkdmfl'
+      };
+      sessionStorage.setItem('user', JSON.stringify(jsonData));
+      window.location.href = '/app/pricing';
+    } else if (this.state.username === 'admin') {
+      const jsonData = {
+        id: 2,
+        username: 'test',
+        roles: ['ROLE_ADMIN'],
+        tokenType: 'Bearer',
+        accessToken: 'tyruteirnoimpfkfjhdegyurfmlknjheujkdmfl'
+      };
+      sessionStorage.setItem('user', JSON.stringify(jsonData));
+      window.location.href = '/app/trade';
+    }
+    this.setState({
+      username: '',
+      password: '',
+      loading: false,
+      message: ''
+    });
 
-        this.setState({
-          username: '',
-          password: '',
-          loading: false,
-          message: ''
-        });
-      }
-    );
+    // AuthService.login(this.state.username, this.state.password).then(
+    //   () => {
+    //     window.location.href = '/app/dashboard';
+    //   },
+    //   (error) => {
+    //     const resMessage =
+    //       (error.response &&
+    //         error.response.data &&
+    //         error.response.data.message) ||
+    //       error.message ||
+    //       error.toString();
+    //     alert(resMessage);
+
+    //     this.setState({
+    //       username: '',
+    //       password: '',
+    //       loading: false,
+    //       message: ''
+    //     });
+    //   }
+    // );
+
     // } else {
     //   this.setState({
     //     loading: false
@@ -124,166 +152,173 @@ class LoginView extends React.Component {
 
   render() {
     // const { classes } = this.props;
-    return (
-      <Page
-        //  className={classes.root}
-        title="Login"
-        style={{ height: '100%' }}
-      >
-        <Box
-          display="flex"
-          flexDirection="column"
-          height="100%"
-          justifyContent="center"
+
+    if (!this.loggedIn) {
+      return <Navigate to="/app/dashboard" />;
+    } else {
+      return (
+        <Page
+          //  className={classes.root}
+          title="Login"
+          style={{ height: '100%' }}
         >
-          <Container maxWidth="sm">
-            <Formik
-              initialValues={
-                {
-                  // email: 'demo@devias.io',
-                  // password: 'Password123'
+          <Box
+            display="flex"
+            flexDirection="column"
+            height="100%"
+            justifyContent="center"
+          >
+            <Container maxWidth="sm">
+              <Formik
+                initialValues={
+                  {
+                    // email: 'demo@devias.io',
+                    // password: 'Password123'
+                  }
                 }
-              }
-              validationSchema={Yup.object().shape({
-                email: Yup.string()
-                  .email('Must be a valid email')
-                  .max(255)
-                  .required('Email is required'),
-                password: Yup.string().max(255).required('Password is required')
-              })}
-              // onSubmit={() => {
-              //   navigate('/app/dashboard', { replace: true });
-              // }}
-            >
-              {({
-                errors,
-                handleBlur,
-                handleChange,
-                handleSubmit,
-                isSubmitting,
-                touched,
-                values
-              }) => (
-                <Form
-                  onSubmit={this.handleLogin}
-                  ref={(c) => {
-                    this.form = c;
-                  }}
-                >
-                  <Box mb={3}>
-                    <Typography color="textPrimary" variant="h2">
-                      Sign in
-                    </Typography>
-                    {/* <Typography
-                      color="textSecondary"
-                      gutterBottom
-                      variant="body2"
-                    >
-                      Sign in on the internal platform
-                    </Typography> */}
-                  </Box>
+                validationSchema={Yup.object().shape({
+                  email: Yup.string()
+                    .email('Must be a valid email')
+                    .max(255)
+                    .required('Email is required'),
+                  password: Yup.string()
+                    .max(255)
+                    .required('Password is required')
+                })}
+                // onSubmit={() => {
+                //   navigate('/app/dashboard', { replace: true });
+                // }}
+              >
+                {({
+                  errors,
+                  handleBlur,
+                  handleChange,
+                  handleSubmit,
+                  isSubmitting,
+                  touched,
+                  values
+                }) => (
+                  <Form
+                    onSubmit={this.handleLogin}
+                    ref={(c) => {
+                      this.form = c;
+                    }}
+                  >
+                    <Box mb={3}>
+                      <Typography color="textPrimary" variant="h2">
+                        Sign in
+                      </Typography>
+                      {/* <Typography
+                        color="textSecondary"
+                        gutterBottom
+                        variant="body2"
+                      >
+                        Sign in on the internal platform
+                      </Typography> */}
+                    </Box>
 
-                  <TextField
-                    error={Boolean(touched.email && errors.email)}
-                    fullWidth
-                    helperText={touched.email && errors.email}
-                    label="Email Address"
-                    margin="normal"
-                    name="email"
-                    // onBlur={handleBlur}
-                    onChange={this.onChangeUsername}
-                    type="email"
-                    // value={values.email}
-                    variant="outlined"
-                    required
-                  />
-
-                  <TextField
-                    error={Boolean(touched.password && errors.password)}
-                    fullWidth
-                    helperText={touched.password && errors.password}
-                    label="Password"
-                    margin="normal"
-                    name="password"
-                    // onBlur={handleBlur}
-                    onChange={this.onChangePassword}
-                    type="password"
-                    // value={values.password}
-                    variant="outlined"
-                    required
-                  />
-                  <Box my={2}>
-                    <Button
-                      color="primary"
-                      disabled={this.state.loading}
+                    <TextField
+                      // error={Boolean(touched.email && errors.email)}
                       fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
+                      helperText={touched.email && errors.email}
+                      label="PF No"
+                      margin="normal"
+                      name="PFNo"
+                      // onBlur={handleBlur}
+                      onChange={this.onChangeUsername}
+                      type="text"
+                      // value={values.email}
+                      variant="outlined"
+                      required
+                    />
+
+                    <TextField
+                      error={Boolean(touched.password && errors.password)}
+                      fullWidth
+                      helperText={touched.password && errors.password}
+                      label="Password"
+                      margin="normal"
+                      name="password"
+                      // onBlur={handleBlur}
+                      onChange={this.onChangePassword}
+                      type="password"
+                      // value={values.password}
+                      variant="outlined"
+                      required
+                    />
+                    <Box my={2}>
+                      <Button
+                        color="primary"
+                        disabled={this.state.loading}
+                        fullWidth
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                        ref={(c) => {
+                          this.checkBtn = c;
+                        }}
+                      >
+                        SIGN IN
+                      </Button>
+                    </Box>
+
+                    {/* <div className="form-group">
+                      <label htmlFor="username">Username</label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.onChangeUsername}
+                        validations={[required]}
+                      />
+                    </div>
+  
+                    <div className="form-group">
+                      <label htmlFor="password">Password</label>
+                      <Input
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.onChangePassword}
+                        validations={[required]}
+                      />
+                    </div>
+  
+                    <div className="form-group">
+                      <button
+                        className="btn btn-primary btn-block"
+                        disabled={this.state.loading}
+                      >
+                        {this.state.loading && (
+                          <span className="spinner-border spinner-border-sm"></span>
+                        )}
+                        <span>Login</span>
+                      </button>
+                    </div>
+  
+                    {this.state.message && (
+                      <div className="form-group">
+                        <div className="alert alert-danger" role="alert">
+                          {this.state.message}
+                        </div>
+                      </div>
+                    )}
+                    <CheckButton
+                      style={{ display: 'none' }}
                       ref={(c) => {
                         this.checkBtn = c;
                       }}
-                    >
-                      SIGN IN
-                    </Button>
-                  </Box>
-
-                  {/* <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <Input
-                      type="text"
-                      className="form-control"
-                      name="username"
-                      value={this.state.username}
-                      onChange={this.onChangeUsername}
-                      validations={[required]}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <Input
-                      type="password"
-                      className="form-control"
-                      name="password"
-                      value={this.state.password}
-                      onChange={this.onChangePassword}
-                      validations={[required]}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <button
-                      className="btn btn-primary btn-block"
-                      disabled={this.state.loading}
-                    >
-                      {this.state.loading && (
-                        <span className="spinner-border spinner-border-sm"></span>
-                      )}
-                      <span>Login</span>
-                    </button>
-                  </div>
-
-                  {this.state.message && (
-                    <div className="form-group">
-                      <div className="alert alert-danger" role="alert">
-                        {this.state.message}
-                      </div>
-                    </div>
-                  )}
-                  <CheckButton
-                    style={{ display: 'none' }}
-                    ref={(c) => {
-                      this.checkBtn = c;
-                    }}
-                  /> */}
-                </Form>
-              )}
-            </Formik>
-          </Container>
-        </Box>
-      </Page>
-    );
+                    /> */}
+                  </Form>
+                )}
+              </Formik>
+            </Container>
+          </Box>
+        </Page>
+      );
+    }
   }
 }
 

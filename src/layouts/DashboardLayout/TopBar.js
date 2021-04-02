@@ -16,6 +16,8 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import Logo from '../../components/Logo';
 
+import AuthService from '../../services/auth.service';
+
 const useStyles = makeStyles(() => ({
   root: {},
   avatar: {
@@ -27,6 +29,12 @@ const useStyles = makeStyles(() => ({
 const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
   const classes = useStyles();
   const [notifications] = useState([]);
+
+  function logout() {
+    AuthService.logout();
+    alert('Logout');
+    window.location.href = '/login';
+  }
 
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
@@ -46,7 +54,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
             </Badge>
           </IconButton>
           <IconButton color="inherit">
-            <InputIcon style={{ color: 'white' }} />
+            <InputIcon style={{ color: 'white' }} onClick={logout} />
           </IconButton>
         </Hidden>
         <Hidden lgUp>
