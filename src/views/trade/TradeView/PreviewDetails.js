@@ -450,7 +450,7 @@ class PreviewDetails extends React.Component {
               })}
 
               <Box display="flex" justifyContent="flex-end" p={2}>
-                <Button
+                {/* <Button
                   className={classes.importButton}
                   color="primary"
                   variant="contained"
@@ -460,7 +460,7 @@ class PreviewDetails extends React.Component {
                 >
                   Save
                 </Button>
-                <br />
+                <br /> */}
                 <Button
                   className={classes.importButton}
                   variant="contained"
@@ -469,7 +469,7 @@ class PreviewDetails extends React.Component {
                     this.alertMsg('Accepted');
                   }}
                 >
-                  Accept
+                  Approve
                 </Button>
                 <br />
                 <Button

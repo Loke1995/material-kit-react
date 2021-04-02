@@ -52,26 +52,28 @@ class routes extends React.Component {
     super(props);
 
     this.state = {
-      showDealer: false,
+      showSeller: false,
       showApprover: false,
       currentUser: undefined
+      // showSeller: true,
+      // showApprover: false,
+      // currentUser: true
     };
   }
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
-
     if (user) {
       this.setState({
         currentUser: user,
-        showDealer: user.roles.includes('ROLE_MODERATOR'),
+        showSeller: user.roles.includes('ROLE_MODERATOR'),
         showApprover: user.roles.includes('ROLE_ADMIN')
       });
     }
   }
 
   render() {
-    const { currentUser, showDealer, showApprover } = this.state;
+    const { currentUser, showSeller, showApprover } = this.state;
     return (
       <Routes>
         <Route path="" element={<MainLayout />}>
@@ -86,7 +88,7 @@ class routes extends React.Component {
           <Route path="app" element={<DashboardLayout />}>
             <Route path="/" element={<DashboardView />} />
             <Route path="dashboard" element={<DashboardView />} />
-            {showDealer && (
+            {showSeller && (
               <Route path="pricing" element={<PricingListView />} />
             )}
             {showApprover && <Route path="trade" element={<TradeView />} />}

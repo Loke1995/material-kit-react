@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -25,6 +25,8 @@ import {
   BarChart2
 } from 'react-feather';
 import NavItem from './NavItem';
+
+import AuthService from '../../../services/auth.service';
 
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
@@ -81,6 +83,47 @@ const items = [
   // }
 ];
 
+const navDealer = [
+  {
+    href: '/app/dashboard',
+    icon: BarChartIcon,
+    title: 'Dashboard'
+  },
+  {
+    href: '/app/pricing',
+    icon: Activity,
+    title: 'Pricing'
+  }
+];
+
+const navApprover = [
+  {
+    href: '/app/dashboard',
+    icon: BarChartIcon,
+    title: 'Dashboard'
+  },
+  {
+    href: '/app/pricing',
+    icon: Activity,
+    title: 'Pricing'
+  },
+  {
+    href: '/app/trade',
+    icon: ShoppingBagIcon,
+    title: 'Trade'
+  },
+  {
+    href: '/app/account',
+    icon: UserIcon,
+    title: 'Report'
+  },
+  {
+    href: '/app/market',
+    icon: BarChart2,
+    title: 'Market'
+  }
+];
+
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
     width: 256
@@ -101,12 +144,33 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
 
+  const [navContent, setNavContent] = useState(items);
+
+  sessionStorage.getItem('user');
+  // const isLoggedIn = sessionStorage.getItem('user') === '123';
+  // if (isLoggedIn) {
+  //   setNavContent(navDealer);
+  // } else {
+  //   setNavContent(navApprover);
+  // }
+
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
+
+  // const user = AuthService.getCurrentUser();
+  // if (user) {
+  //   this.setState({
+  //     currentUser: user,
+  //     showDealer: user.roles.includes('ROLE_MODERATOR'),
+  //     showApprover: user.roles.includes('ROLE_ADMIN')
+  //   });
+  // }
+
+  // setNavContent(navDealer);
 
   const content = (
     <Box height="100%" display="flex" flexDirection="column">
@@ -139,7 +203,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       <Divider /> */}
       <Box p={2}>
         <List>
-          {items.map((item) => (
+          {navContent.map((item) => (
             <NavItem
               href={item.href}
               key={item.title}

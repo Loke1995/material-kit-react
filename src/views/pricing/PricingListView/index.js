@@ -7,6 +7,7 @@ import FXSpot from './FXSpotList';
 
 import PricingList from './PricingList';
 import PropTypes from 'prop-types';
+import CustomizePricing from './CustomizePricing';
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -21,9 +22,11 @@ class PricingListView extends React.Component {
   constructor(props) {
     super(props);
     this.parentmethod = this.parentmethod.bind(this);
+    this.pricingCall = this.pricingCall.bind(this);
     this.state = {
       templateName: '',
-      templateType: ''
+      templateType: '',
+      pricingShow: false
     };
   }
   //here 'data' represents the data recieved from the child when this method gets called inside the child
@@ -31,6 +34,12 @@ class PricingListView extends React.Component {
     this.setState({
       templateName: name,
       templateType: type
+    });
+  }
+
+  pricingCall(show) {
+    this.setState({
+      pricingShow: show
     });
   }
 
@@ -50,9 +59,9 @@ class PricingListView extends React.Component {
             <Grid item lg={6} sm={6} xl={6} xs={12}>
               {/* {this.state.templateListLoadID === '1' ? ( */}
               <Template
-                name={'Geek'}
                 templateName={this.state.templateName}
                 templateType={this.state.templateType}
+                methodShowPricing={this.pricingCall}
                 // templateData={
                 //   (this.state.templateName, this.state.templateType)
                 // }
@@ -67,15 +76,21 @@ class PricingListView extends React.Component {
             </Grid>
           </Grid>
 
-          <Grid container spacing={2}>
+          {/* <Grid container spacing={2}>
             <Grid item lg={6} sm={6} xl={6} xs={12}>
-              {/* <CreateDetails /> */}
               <FXSpot />
             </Grid>
             <Grid item lg={6} sm={6} xl={6} xs={12}>
-              {/* <PricingList /> */}
             </Grid>
-          </Grid>
+          </Grid> */}
+
+          {this.state.pricingShow ? (
+            <Grid container spacing={2}>
+              <Grid item lg={12} sm={12} xl={12} xs={12}>
+                <CustomizePricing />
+              </Grid>
+            </Grid>
+          ) : null}
 
           <Grid container spacing={2}>
             <Grid item lg={12} sm={12} xl={12} xs={12}>

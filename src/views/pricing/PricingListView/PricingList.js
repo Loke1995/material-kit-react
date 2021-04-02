@@ -499,7 +499,7 @@ const PricingList = ({ className, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="" />
+      <CardHeader title="Pricing Output" />
       <Divider />
       {/* <CardContent>
 </CardContent> */}

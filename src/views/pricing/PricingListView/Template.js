@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 import CreateDetails from './CreateDetails';
+import { boolean } from 'yup';
 
 const styles = (theme) => ({
   root: {},
@@ -42,7 +43,8 @@ const templateData = [
   },
   {
     FieldLabel: 'Type',
-    FieldPlaceHolder: 'Vanila|Seagull|Collar',
+    FieldPlaceHolder:
+      'Vanilla|Collar|Seagull|Calendar Forward|Capped Forward|Leverage Forward|Anytime KO Fwd|At Expiry KO Fwd',
     FieldType: 'dropdown'
   },
   {
@@ -109,17 +111,41 @@ class Template extends React.Component {
     };
     this.createTemplate = this.createTemplate.bind(this);
     this.moreOptions = this.moreOptions.bind(this);
+    this.pricingCallTemplate = this.pricingCallTemplate.bind(this);
   }
 
-  moreOptions(item) {
+  moreOptions(show) {
     this.setState({
-      moreOption: !this.state.moreOption
+      moreOption: show
     });
   }
 
-  createTemplate() {
+  createTemplate(show) {
     this.setState({
-      createTemplate: true
+      createTemplate: show
+    });
+  }
+
+  onDropdownSelected2(e) {
+    console.log('in');
+    console.log('THE VAL', e.target.value);
+
+    //here you will see the current selected value of the select input
+  }
+
+  onDropdownSelected = (event, child) => {
+    console.log('in');
+    console.log(event.target.value);
+    // this.setState({
+    //   selectedID: child.key,
+    //   visibleValue: event.target.value
+    // });
+  };
+
+  pricingCallTemplate(show) {
+    this.props.methodShowPricing(show);
+    this.setState({
+      moreOption: show
     });
   }
 
@@ -131,6 +157,8 @@ class Template extends React.Component {
       <CreateDetails
         templateName={this.props.templateName}
         templateType={this.props.templateType}
+        methodShowPricingTemplate={this.pricingCallTemplate}
+        methodCreateTemplate={this.createTemplate}
       />
     ) : (
       <div className={classes.root}>
@@ -143,7 +171,6 @@ class Template extends React.Component {
             <Divider />
             <CardContent>
               {/* <h1>{this.props.templateType} 123</h1> */}
-
               <Grid container spacing={3}>
                 {templateData.map(function (option) {
                   if (option.FieldType === 'text') {
@@ -166,15 +193,18 @@ class Template extends React.Component {
 
                     return (
                       <Grid item md={6} xs={12}>
+                        {/* {console.log('|' + option.FieldLabel + '|')} */}
                         <TextField
                           fullWidth
                           label={option.FieldLabel}
-                          name="state"
+                          name={option.FieldLabel}
                           required
                           select
                           SelectProps={{ native: true }}
                           key={dropdownlist[0]}
                           variant="outlined"
+                          // onChange={this.onDropdownSelected}
+                          onChange={console.log('changed')}
                         >
                           {dropdownlist.map((option) => (
                             <option key={option} value={option}>
@@ -208,7 +238,7 @@ class Template extends React.Component {
                 <Button
                   style={{ color: 'blue' }}
                   onClick={() => {
-                    this.moreOptions();
+                    this.moreOptions(!this.state.moreOption);
                   }}
                 >
                   {this.state.moreOption ? 'Less Options' : 'More Options'}
@@ -217,30 +247,73 @@ class Template extends React.Component {
               {/* <Divider /> */}
               <br />
 
-              {/* <Grid container spacing={3}>
+              {/* {data3['Test::stripsInfo'].map(function (option) {
+                console.log(option[1]);
+              })} */}
+              <Grid container spacing={3}>
                 {moreOption ? (
                   data3['Test::stripsInfo'].map(function (option) {
-                    if (option.FieldType === 'text') {
+                    if (option[0].toLowerCase().indexOf('date') > -1) {
                       return (
                         <Grid item md={6} xs={12}>
                           <TextField
                             fullWidth
-                            label={option.FieldLabel}
+                            name={option[0]}
+                            label={option[0]}
+                            required
+                            SelectProps={{ native: true }}
+                            variant="outlined"
+                            type="date"
+                            InputLabelProps={{ shrink: true }}
+                            // defaultValue={option[1]}
+                          />
+                        </Grid>
+                      );
+                    } else if (option[2] === '') {
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            label={option[0]}
                             required
                             variant="outlined"
-                            key={option.FieldPlaceHolder}
+                            key={option[1]}
+                            placeholder={option[1]}
                             InputLabelProps={{ shrink: true }}
                           />
                         </Grid>
                       );
-                    } else if (option.FieldType === 'dropdown') {
-                      var dropdownlist = option.FieldPlaceHolder.split('|');
+                      // } else if (option.FieldType === 'dropdown') {
+                      //   var dropdownlist = option.FieldPlaceHolder.split('|');
+
+                      //   return (
+                      //     <Grid item md={6} xs={12}>
+                      //       <TextField
+                      //         fullWidth
+                      //         label={option.FieldLabel}
+                      //         name="state"
+                      //         required
+                      //         select
+                      //         SelectProps={{ native: true }}
+                      //         key={dropdownlist[0]}
+                      //         variant="outlined"
+                      //       >
+                      //         {dropdownlist.map((option) => (
+                      //           <option key={option} value={option}>
+                      //             {option}
+                      //           </option>
+                      //         ))}
+                      //       </TextField>
+                      //     </Grid>
+                      //   );
+                    } else {
+                      var dropdownlist = option[2].split(',');
 
                       return (
                         <Grid item md={6} xs={12}>
                           <TextField
                             fullWidth
-                            label={option.FieldLabel}
+                            label={option[0]}
                             name="state"
                             required
                             select
@@ -256,29 +329,14 @@ class Template extends React.Component {
                           </TextField>
                         </Grid>
                       );
-                    } else if (option.FieldType === 'date') {
-                      return (
-                        <Grid item md={6} xs={12}>
-                          <TextField
-                            fullWidth
-                            name="startDate"
-                            label={option.FieldLabel}
-                            required
-                            SelectProps={{ native: true }}
-                            variant="outlined"
-                            type="date"
-                            InputLabelProps={{ shrink: true }}
-                          />
-                        </Grid>
-                      );
                     }
                   })
                 ) : (
                   <Box></Box>
                 )}
-              </Grid> */}
+              </Grid>
 
-              <Grid container spacing={3}>
+              {/* <Grid container spacing={3}>
                 {moreOption ? (
                   templateDataSecondPart.map(function (option) {
                     if (option.FieldType === 'text') {
@@ -337,7 +395,7 @@ class Template extends React.Component {
                 ) : (
                   <Box></Box>
                 )}
-              </Grid>
+              </Grid> */}
 
               <Box display="flex" justifyContent="flex-end" p={2}>
                 <Button
@@ -358,7 +416,7 @@ class Template extends React.Component {
                   variant="contained"
                   onClick={() => {
                     // alert('Created');
-                    this.createTemplate();
+                    this.createTemplate(true);
                   }}
                 >
                   Create

@@ -146,6 +146,83 @@ const data = [
   }
 ];
 
+const seagull = {
+  'Test::Structure': [
+    ['Sales Folder Name', 'MYFOP_TR1', "'=SFolder_ShortName", null],
+    ['Trading Folder Name', 'MYFOP_TR9', "'=SFolder_ShortName", null],
+    ['Customer Name', '03ANSH', "'=SCpty_ShortName", null],
+    ['Base Ccy', 'USD', 'USD,EUR,AUD,SGD,JPY,GBP,CNH,NZD,CAD', null],
+    ['Profit Currency', 'Term', 'Term', null],
+    ['Term Ccy', 'MYR', 'SGD,MYR', null],
+    ['Client to Sell or Buy Base Ccy', 'Buy', 'Buy,Sell', null]
+    // ['FxSpot', 4.27075, null, null],
+    // ['Value Date', '08-Oct-20', null, 'd-mmm-yy'],
+    // ['BaseCcyUSDRate', 1, null, '#,##0.0000_);[Red](#,##0.0000)'],
+    // ['USDMYROpenRate', 4.27075, null, '#,##0.0000_);[Red](#,##0.0000)'],
+    // ['Pricing Model', 'Black-Scholes', 'Black-Scholes,Vanna-Volga', null],
+    // ['Upper Strike', 4.280749999999999, '', null],
+    // ['Middle Strike', 4.2757499999999995, '', null],
+    // ['Lower Strike', 4.26575, '', null],
+    // ['Notional', 10000, '', null],
+    // ['Leverage Factor', 1.2, '', null]
+    // ['Dates', '1m', '1m,2m', null],
+    // ['Status', '', '', ''],
+    // ['PV', '', '', ''],
+    // ['Delta', '', '', ''],
+    // ['Vega', '', '', '']
+  ]
+};
+
+const vanilla = {
+  'Test::Structure': [
+    ['Sales Folder Name', 'MYFOP_TR1', "'=SFolder_ShortName", null],
+    ['Trading Folder Name', 'MYFOP_TR9', "'=SFolder_ShortName", null],
+    ['Customer Name', '03ANSH', "'=SCpty_ShortName", null],
+    ['Base Ccy', 'USD', 'USD,EUR,AUD,SGD,JPY,GBP,CNH,NZD,CAD', null],
+    ['Profit Currency', 'Term', 'Term', null],
+    ['Term Ccy', 'MYR', 'SGD,MYR', null],
+    ['Client to Sell or Buy Base Ccy', 'Buy', 'Buy,Sell', null],
+    // ['FxSpot', 4.27075, null, null],
+    // ['Value Date', '08-Oct-20', null, 'd-mmm-yy'],
+    // ['BaseCcyUSDRate', 1, null, '#,##0.0000_);[Red](#,##0.0000)'],
+    // ['USDMYROpenRate', 4.27075, null, '#,##0.0000_);[Red](#,##0.0000)'],
+    ['Pricing Model', 'Black-Scholes', 'Black-Scholes,Vanna-Volga', null],
+    ['Option Type', 'Call', null, null],
+    ['Direction', 'Client buys', null, null],
+    ['Pricing View', 'Two-way Price', null, null],
+
+    ['Strike', 4.149, '', null],
+    ['PointsOverride', null, '', null],
+    ['VolOverride', null, '', null],
+    ['Notional', 10000, '', null],
+    ['Dates', '1m', '1m,2m', null]
+    // ['Status', '', '', ''],
+
+    // ['PV', '', '', ''],
+    // ['Delta', '', '', ''],
+    // ['Vega', '', '', '']
+  ]
+};
+
+const lowerPart = {
+  'Test::Structure': [
+    ['FxSpot', 4.27075, null, null],
+    ['Value Date', '08-Oct-20', null, 'd-mmm-yy'],
+    ['BaseCcyUSDRate', 1, null, '#,##0.0000_);[Red](#,##0.0000)'],
+    ['USDMYROpenRate', 4.27075, null, '#,##0.0000_);[Red](#,##0.0000)'],
+    ['Pricing Model', 'Black-Scholes', 'Black-Scholes,Vanna-Volga', null],
+    ['Upper Strike', 4.280749999999999, '', null],
+    ['Middle Strike', 4.2757499999999995, '', null],
+    ['Lower Strike', 4.26575, '', null],
+    ['Notional', 10000, '', null],
+    ['Leverage Factor', 1.2, '', null][('Dates', '1m', '1m,2m', null)],
+    ['Status', '', '', ''],
+    ['PV', '', '', ''],
+    ['Delta', '', '', ''],
+    ['Vega', '', '', '']
+  ]
+};
+
 function resetForm() {
   alert('Great Shot!');
 }
@@ -155,6 +232,7 @@ class CreateDetails extends React.Component {
     super(props);
     this.state = {
       dataPV: data,
+      newTest: seagull,
       pricingV: true,
       fxspot: 4.1057,
       templateName: this.props.templateName,
@@ -162,6 +240,11 @@ class CreateDetails extends React.Component {
     };
     this.hideButton = this.hideButton.bind(this);
     this.updateFXSpot = this.updateFXSpot.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
   }
 
   // renderPricing = () => {
@@ -268,20 +351,97 @@ class CreateDetails extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { fxspot, pricingV } = this.state;
+    const { fxspot, pricingV, newTest } = this.state;
     return (
       <div className={classes.root}>
         <form autoComplete="off" noValidate className={clsx(classes.root)}>
           <Card>
             <CardHeader
               // subheader="The information can be edited"
-              title="Create Details"
+              title="Create Pricing Details"
             />
             <Divider />
             {/* <h1>{this.props.templateName}</h1>
             <h1>{this.props.templateType}</h1> */}
             <CardContent>
+              {/* <Grid container spacing={3}>
+                {newTest['Test::Structure'] ? (
+                  newTest['Test::Structure'].map(function (option) {
+                    if (option[0].toLowerCase().indexOf('date') > -1) {
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            name={option[0]}
+                            label={option[0]}
+                            required
+                            SelectProps={{ native: true }}
+                            variant="outlined"
+                            type="date"
+                            InputLabelProps={{ shrink: true }}
+                          />
+                        </Grid>
+                      );
+                    } else {
+                      return (
+                        <Grid item md={6} xs={12}>
+                          <TextField
+                            fullWidth
+                            label={option[0]}
+                            required
+                            variant="outlined"
+                            key={option[1]}
+                            placeholder={option[1]}
+                            InputLabelProps={{ shrink: true }}
+                          />
+                        </Grid>
+                      );
+                    }
+                  })
+                ) : (
+                  <Grid> </Grid>
+                )}
+              </Grid> */}
+              {/* <br />
+              <Divider />
+              <br /> */}
               <Grid container spacing={3}>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Sales Folder Name"
+                    required
+                    variant="outlined"
+                    // key="SalesBDSN"
+                    placeholder="MYFOP_TR1"
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Trading Folder Name"
+                    required
+                    variant="outlined"
+                    // key="SalesBDSN"
+                    placeholder="MYFOP_TR9"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Customer Name"
+                    required
+                    variant="outlined"
+                    // key="SalesBDSN"
+                    placeholder="03ANSH"
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
@@ -448,6 +608,9 @@ class CreateDetails extends React.Component {
                   />
                 </Grid>
 
+                <Grid item md={12} xs={12}>
+                  <Divider />
+                </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
                     fullWidth
@@ -507,6 +670,7 @@ class CreateDetails extends React.Component {
                     required
                     variant="outlined"
                     key="USDMYROpenRate"
+                    placeholder="1"
                     InputLabelProps={{ shrink: true }}
                   />
                 </Grid>
@@ -595,7 +759,6 @@ class CreateDetails extends React.Component {
                 </Grid>
               </Grid>
               <br />
-
               {pricingV ? (
                 <Box display="flex" justifyContent="flex-end" p={2}>
                   <Button
@@ -608,6 +771,7 @@ class CreateDetails extends React.Component {
                         dataPV: data2
                       });
                       this.hideButton(false);
+                      this.props.methodShowPricingTemplate(true);
                     }}
                   >
                     Pricing
@@ -625,6 +789,7 @@ class CreateDetails extends React.Component {
                         this.setState({
                           dataPV: data
                         });
+                        this.props.methodShowPricingTemplate(false);
                       } else {
                         e.preventDefault();
                       }
@@ -987,6 +1152,8 @@ class CreateDetails extends React.Component {
                         dataPV: data
                       });
                       this.hideButton(true);
+                      this.props.methodShowPricingTemplate(false);
+                      this.props.methodCreateTemplate(false);
                     }}
                   >
                     Review
@@ -997,11 +1164,13 @@ class CreateDetails extends React.Component {
                     color="primary"
                     variant="contained"
                     onClick={() => {
-                      alert('Trade Reviewing');
+                      alert('Trade has been sent to booking.');
                       this.setState({
                         dataPV: data
                       });
                       this.hideButton(true);
+                      this.props.methodShowPricingTemplate(false);
+                      this.props.methodCreateTemplate(false);
                     }}
                   >
                     Book
