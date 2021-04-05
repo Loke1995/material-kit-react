@@ -49,7 +49,9 @@ class LoginView extends React.Component {
       password: '',
       loading: false,
       message: '',
-      loggedIn: sessionStorage.getItem('user') === 'true'
+      loggedIn: sessionStorage.getItem('user')
+        ? sessionStorage.getItem('user').accessToken !== null
+        : null
     };
 
     if (sessionStorage.getItem('user')) {
@@ -113,7 +115,18 @@ class LoginView extends React.Component {
       };
       sessionStorage.setItem('user', JSON.stringify(jsonData));
       window.location.href = '/app/trade';
+    } else if (this.state.username === 'all') {
+      const jsonData = {
+        id: 2,
+        username: 'test',
+        roles: ['ROLE_MODERATOR', 'ROLE_ADMIN'],
+        tokenType: 'Bearer',
+        accessToken: 'tyruteirnoimpfkfjhdegyurfmlknjheujkdmfl'
+      };
+      sessionStorage.setItem('user', JSON.stringify(jsonData));
+      window.location.href = '/app/trade';
     }
+
     this.setState({
       username: '',
       password: '',
@@ -152,8 +165,7 @@ class LoginView extends React.Component {
 
   render() {
     // const { classes } = this.props;
-
-    if (!this.loggedIn) {
+    if (this.state.loggedIn) {
       return <Navigate to="/app/dashboard" />;
     } else {
       return (

@@ -224,7 +224,7 @@ const LatestOrders = ({ className, ...rest }) => {
       <Divider />
 
       <MaterialTable
-        title="Table Preview"
+        title=""
         columns={columns}
         data={data}
         options={{
@@ -237,7 +237,9 @@ const LatestOrders = ({ className, ...rest }) => {
             textOverflow: 'ellipsis',
             paddingLeft: 5,
             paddingRight: 5,
-            fontWeight: 'bold'
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+            fontWeight: '400',
+            fontSize: '12px'
           }
         }}
         icons={tableIcons}

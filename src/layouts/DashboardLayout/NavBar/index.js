@@ -38,26 +38,31 @@ const user = {
 const items = [
   {
     href: '/app/dashboard',
+    key: 'dashboard',
     icon: BarChartIcon,
     title: 'Dashboard'
   },
   {
     href: '/app/pricing',
+    key: 'pricing',
     icon: Activity,
     title: 'Pricing'
   },
   {
     href: '/app/trade',
+    key: 'trade',
     icon: ShoppingBagIcon,
     title: 'Trade'
   },
   {
     href: '/app/account',
+    key: 'account',
     icon: UserIcon,
     title: 'Report'
   },
   {
     href: '/app/market',
+    key: 'market',
     icon: BarChart2,
     title: 'Market'
   }
@@ -87,11 +92,13 @@ const items = [
 const navDealer = [
   {
     href: '/app/dashboard',
+    key: 'dashboard',
     icon: BarChartIcon,
     title: 'Dashboard'
   },
   {
     href: '/app/pricing',
+    key: 'pricing',
     icon: Activity,
     title: 'Pricing'
   }
@@ -100,26 +107,25 @@ const navDealer = [
 const navApprover = [
   {
     href: '/app/dashboard',
+    key: 'dashboard',
     icon: BarChartIcon,
     title: 'Dashboard'
   },
   {
-    href: '/app/pricing',
-    icon: Activity,
-    title: 'Pricing'
-  },
-  {
     href: '/app/trade',
+    key: 'trade',
     icon: ShoppingBagIcon,
     title: 'Trade'
   },
   {
     href: '/app/account',
+    key: 'account',
     icon: UserIcon,
     title: 'Report'
   },
   {
     href: '/app/market',
+    key: 'market',
     icon: BarChart2,
     title: 'Market'
   }
@@ -146,19 +152,30 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
 
   const [navContent, setNavContent] = useState(items);
-
-  sessionStorage.getItem('user');
-  // const isLoggedIn = sessionStorage.getItem('user') === '123';
-  // if (isLoggedIn) {
-  //   setNavContent(navDealer);
-  // } else {
-  //   setNavContent(navApprover);
-  // }
+  const [showSeller, setShowSeller] = useState(false);
+  const [showApprover, setShowApprover] = useState(false);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
+
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setShowSeller(user.roles.includes('ROLE_MODERATOR'));
+      setShowApprover(user.roles.includes('ROLE_ADMIN'));
+    }
+
+    if (showSeller && showApprover) {
+      setNavContent(items);
+    } else if (showSeller && !showApprover) {
+      setNavContent(navDealer);
+    } else if (!showSeller && showApprover) {
+      setNavContent(navApprover);
+    } else {
+      setNavContent(items);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
@@ -207,7 +224,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           {navContent.map((item) => (
             <NavItem
               href={item.href}
-              key={item.title}
+              key={item.key}
               title={item.title}
               icon={item.icon}
             />

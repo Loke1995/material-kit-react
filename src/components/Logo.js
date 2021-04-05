@@ -10,10 +10,22 @@ const Logo = (props) => {
         <img
           style={{ height: '1.8rem', width: 'auto' }}
           alt="Logo"
-          src="/static/logo_white_maybank.png"
+          // src="/static/logo_white_maybank.png"
+          src="/static/logo_maybank.png"
+          // src="/static/MAESTRO_LOGO.png"
           {...props}
         />
       </IconButton>
+      {/* <IconButton color="inherit">
+        <img
+          style={{ height: '1.8rem', width: 'auto', marginBottom: '4px' }}
+          alt="Logo"
+          // src="/static/logo_white_maybank.png"
+          // src="/static/logo_maybank.png"
+          src="/static/MAESTRO_LOGO.png"
+          {...props}
+        />
+      </IconButton> */}
       {/* Maestro */}
     </h1>
   );

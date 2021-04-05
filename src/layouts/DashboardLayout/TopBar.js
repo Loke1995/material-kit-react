@@ -38,7 +38,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
 
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
-      <Toolbar style={{ background: '#333' }}>
+      <Toolbar>
         <RouterLink to="/">
           <Logo />
         </RouterLink>

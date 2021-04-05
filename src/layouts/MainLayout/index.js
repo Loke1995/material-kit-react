@@ -34,7 +34,7 @@ const MainLayout = () => {
 
   return (
     <div className={classes.root}>
-      <TopBar style={{ background: '#333' }} />
+      <TopBar />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
