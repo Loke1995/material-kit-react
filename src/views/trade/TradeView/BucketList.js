@@ -272,7 +272,7 @@ class BucketList extends React.Component {
           //     <CreateIcon /> Bucket Review Listing
           //   </h4>
           // }
-          style={{ backgroundColor: 'gray', color: 'white' }}
+          style={{ backgroundColor: 'gray', color: 'white', height: '2.5rem' }}
         />
         <Divider />
         {data.map((ub, i) => {

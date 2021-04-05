@@ -38,7 +38,8 @@ import {
   makeStyles,
   Paper,
   CardContent,
-  Grid
+  Grid,
+  CardActions
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { DataGrid } from '@material-ui/data-grid';
@@ -46,9 +47,7 @@ import MaterialTable from 'material-table';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-
-import CreateIcon from '@material-ui/icons/Create';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const data3 = {
   'FXStructurePricingResponse::DELTA': -1588496.8722428496,
@@ -549,31 +548,13 @@ const StipeList = ({ className, ...rest }) => {
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
       title={<h4 style={{ display:'inline-flex', alignItems: 'center',
-      height: '2.5rem' }}><CreateIcon style={{ paddingRight: '5px' }}/> Strip List</h4>} style={{backgroundColor: 'gray', color: 'white'}}/>
+      height: '2.5rem' }}><AddCircleOutlineIcon style={{ paddingRight: '5px' }}/> Strip List</h4>} style={{backgroundColor: 'gray', color: 'white'}}/>
       <Divider />
       {/* <CardContent>
 </CardContent> */}
 
       <MaterialTable
-        title={<Grid container justify="space-between"><Grid item lg={6} sm={6} xl={6} xs={6}><Button
-          className={classes.importButton}
-          // color="primary"
-          // variant="contained"
-          onClick={() => {
-            alert('Add');
-          }}
-          endIcon={<AddIcon />}
-        >
-        </Button></Grid><Grid item lg={6} sm={6} xl={6} xs={6}><Button
-          className={classes.importButton}
-          // color="primary"
-          // variant="contained"
-          onClick={() => {
-            alert('Remove');
-          }}
-          endIcon={<DeleteIcon/>}
-        >
-        </Button></Grid></Grid>}
+        title=""
         columns={arr}
         data={arrRow}
         options={{
@@ -593,6 +574,25 @@ const StipeList = ({ className, ...rest }) => {
         }}
         icons={tableIcons}
       />
+
+      <CardActions>
+        <Button size="small" color="primary" onClick={() => alert("Add")}>
+          <AddCircleOutlineIcon/>
+        </Button>
+        <Button size="small" color="secondary" onClick={() => alert("Delete")}>
+          <DeleteIcon/>
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => {
+            alert('Save');
+          }}
+        >
+          Save
+        </Button>
+      </CardActions>
+
 
       {/* <DataGrid rows={rows} columns={columns} pageSize={5} /> */}
 

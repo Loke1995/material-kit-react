@@ -138,6 +138,14 @@ const styles = (theme) => ({
   },
   divFullWidth: {
     width: '100%'
+  },
+  root2: {
+    flexGrow: 1
+  },
+  paper2: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary
   }
 });
 
@@ -269,6 +277,49 @@ class TemplateList extends React.Component {
                 <AccordionDetails>
                   <div className={classes.divFullWidth}>
                     <Paper className={classes.paper}>
+                      {/* <div className={classes.root2}>
+                        <Grid container spacing={3}>
+                          <Grid item xs={6} sm={3}>
+                            <Typography
+                              color="textSecondary"
+                              gutterBottom
+                              variant="h6"
+                            >
+                              Name:
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6} sm={3}>
+                            <Typography
+                              color="textPrimary"
+                              gutterBottom
+                              variant="h6"
+                              style={{ color: '#FFC83D', textAlign: 'left' }}
+                            >
+                              {ub.TemplateName}
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6} sm={3}>
+                            <Typography
+                              color="textSecondary"
+                              gutterBottom
+                              variant="h6"
+                            >
+                              Name:
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={6} sm={3}>
+                            <Typography
+                              color="textPrimary"
+                              gutterBottom
+                              variant="h6"
+                              style={{ color: '#FFC83D', textAlign: 'left' }}
+                            >
+                              {ub.TemplateName}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </div> */}
+
                       <Grid
                         container
                         lg={12}

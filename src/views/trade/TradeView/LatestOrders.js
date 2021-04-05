@@ -220,7 +220,14 @@ const LatestOrders = ({ className, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Trade Listing" />
+      <CardHeader
+        title="Trade Listing"
+        style={{
+          backgroundColor: 'gray',
+          color: 'white',
+          height: '2.5rem'
+        }}
+      />
       <Divider />
 
       <MaterialTable

@@ -35,9 +35,14 @@ class TradeView extends React.Component {
     return (
       <Page title="Customers">
         <Container maxWidth={false}>
-          <Grid container spacing={2}>
+          <Grid item lg={12} sm={12} xl={12} xs={12}>
+            <br />
+          </Grid>
+          <Grid container spacing={3}>
             <Grid item lg={6} sm={6} xl={6} xs={12}>
-              <PreviewDetails templateID={this.state.bucketListPick} />
+              <PreviewDetails />
+
+              {/* <PreviewDetails templateID={this.state.bucketListPick} /> */}
             </Grid>
             <Grid item lg={6} sm={6} xl={6} xs={12}>
               <BucketList methodBucketList={this.bucketListPick} />

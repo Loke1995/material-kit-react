@@ -32,7 +32,7 @@ import CreateIcon from '@material-ui/icons/Create';
 const styles = (theme) => ({
   root: {
     // display: 'flex',
-    flexGrow: 1
+    // flexGrow: 1
   },
   details: {
     display: 'flex',
@@ -199,22 +199,32 @@ class PreviewDetails extends React.Component {
               }}
             />
             <Divider />
-            {this.props.templateID}
             {this.state.dataRender ? (
               this.state.dataRender.map(function (ub) {
                 return (
                   <div className={classes.root}>
                     <Paper className={classes.paper}>
-                      <Grid container spacing={2}>
-                        <Grid item></Grid>
-                        <Grid item xs={12} md={12} sm container>
+                      <Grid container spacing={0}>
+                        <Grid item>
+                          <br />
+                        </Grid>
+                        <Grid
+                          xs={12}
+                          md={12}
+                          sm
+                          container
+                          style={{
+                            marginTop: '1.25rem',
+                            marginBottom: '0.25rem'
+                          }}
+                        >
                           <Grid
                             item
                             md={6}
                             xs={6}
                             container
                             direction="column"
-                            spacing={2}
+                            spacing={1}
                           >
                             <Grid item>
                               <Typography component="h5" variant="h5">
