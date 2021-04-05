@@ -28,6 +28,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import RefreshIcon from '@material-ui/icons/Refresh';
+import CreateIcon from '@material-ui/icons/Create';
 
 const styles = (theme) => ({
   root: {
@@ -71,6 +72,10 @@ const styles = (theme) => ({
   rightPanel: {
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  //style for font size
+  resize: {
+    fontSize: 12
   }
 });
 
@@ -236,7 +241,8 @@ class CreateDetails extends React.Component {
       pricingV: true,
       fxspot: 4.1057,
       templateName: this.props.templateName,
-      templateType: this.props.templateType
+      templateType: this.props.templateType,
+      pvData: this.props.pvData
     };
     this.hideButton = this.hideButton.bind(this);
     this.updateFXSpot = this.updateFXSpot.bind(this);
@@ -351,14 +357,25 @@ class CreateDetails extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { fxspot, pricingV, newTest } = this.state;
+    const { fxspot, pricingV, pvData } = this.state;
     return (
       <div className={classes.root}>
         <form autoComplete="off" noValidate className={clsx(classes.root)}>
           <Card>
             <CardHeader
               // subheader="The information can be edited"
-              title="Create Pricing Details"
+              // title="Create Pricing Details"
+              title={
+                <h4 style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <CreateIcon style={{ paddingRight: '5px' }} /> Create Pricing
+                  Details
+                </h4>
+              }
+              style={{
+                backgroundColor: 'gray',
+                color: 'white',
+                height: '2.5rem'
+              }}
             />
             <Divider />
             {/* <h1>{this.props.templateName}</h1>
@@ -417,6 +434,11 @@ class CreateDetails extends React.Component {
                     value={this.state.value}
                     onChange={this.handleChange}
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -428,6 +450,11 @@ class CreateDetails extends React.Component {
                     // key="SalesBDSN"
                     placeholder="MYFOP_TR9"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -439,6 +466,11 @@ class CreateDetails extends React.Component {
                     // key="SalesBDSN"
                     placeholder="03ANSH"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -451,6 +483,11 @@ class CreateDetails extends React.Component {
                     variant="outlined"
                     SelectProps={{ native: true }}
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   >
                     {data2[0].BaseCcy.split('|').map(function (option) {
                       return (
@@ -471,6 +508,11 @@ class CreateDetails extends React.Component {
                     select
                     SelectProps={{ native: true }}
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   >
                     {data2[0].ProfitCurrency.split('|').map(function (option) {
                       return (
@@ -491,6 +533,11 @@ class CreateDetails extends React.Component {
                     select
                     SelectProps={{ native: true }}
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   >
                     {data2[0].TermCcy.split('|').map(function (option) {
                       return (
@@ -511,6 +558,11 @@ class CreateDetails extends React.Component {
                     select
                     SelectProps={{ native: true }}
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   >
                     {data2[0].TransactionBaseCcy.split('|').map(function (
                       option
@@ -533,6 +585,11 @@ class CreateDetails extends React.Component {
                     key="SalesBDSN"
                     placeholder="Default"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -546,6 +603,11 @@ class CreateDetails extends React.Component {
                     // placeholder="INTERBANK"
                     placeholder={this.state.templateName}
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
                 {/* {alert(this.state.templateName)} */}
@@ -558,6 +620,11 @@ class CreateDetails extends React.Component {
                     key="SalesDSGD"
                     placeholder="INTERBANK TRANSACTION"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -569,6 +636,11 @@ class CreateDetails extends React.Component {
                     variant="outlined"
                     key="SalesComment"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -581,6 +653,11 @@ class CreateDetails extends React.Component {
                     key="TradingBDBSN"
                     placeholder="TRG"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -593,6 +670,11 @@ class CreateDetails extends React.Component {
                     key="TradingDGN"
                     placeholder="INTERBANK"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -605,6 +687,11 @@ class CreateDetails extends React.Component {
                     key="TradingDSGD"
                     placeholder="INTERBANK TRANSACTION"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -632,7 +719,10 @@ class CreateDetails extends React.Component {
                         >
                           <RefreshIcon style={{ color: 'blue' }} />
                         </Button>
-                      )
+                      ),
+                      classes: {
+                        input: classes.resize
+                      }
                     }}
                   />
                 </Grid>
@@ -647,6 +737,11 @@ class CreateDetails extends React.Component {
                     placeholder=""
                     type="date"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -660,6 +755,11 @@ class CreateDetails extends React.Component {
                     value="1.00000"
                     disabled
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -672,6 +772,11 @@ class CreateDetails extends React.Component {
                     key="USDMYROpenRate"
                     placeholder="1"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -683,6 +788,11 @@ class CreateDetails extends React.Component {
                     key="PricingModel"
                     placeholder="Black Scholar"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -694,6 +804,11 @@ class CreateDetails extends React.Component {
                     key="CapStrike"
                     placeholder="4.1"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -705,6 +820,11 @@ class CreateDetails extends React.Component {
                     key="FloorStrike"
                     placeholder="4.0"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -716,6 +836,11 @@ class CreateDetails extends React.Component {
                     key="Notional"
                     placeholder="1,000,000.00"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
@@ -727,6 +852,11 @@ class CreateDetails extends React.Component {
                     key="LeverageFactor"
                     placeholder="2.0"
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -739,6 +869,11 @@ class CreateDetails extends React.Component {
                     select
                     SelectProps={{ native: true }}
                     InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      classes: {
+                        input: classes.resize
+                      }
+                    }}
                   >
                     <option key={'weekly'} value={'weekly'}>
                       Weekly
@@ -766,12 +901,50 @@ class CreateDetails extends React.Component {
                     color="primary"
                     variant="contained"
                     onClick={() => {
+                      alert('Save');
+                      this.setState({
+                        dataPV: data2
+                      });
+                      this.hideButton(false);
+                      // this.props.methodCustomizeTemplate(true);
+                      // this.props.methodShowPricingTemplate(false);
+                      // this.props.methodMoreOption(false);
+                    }}
+                  >
+                    Save
+                  </Button>
+                  <br />
+                  <Button
+                    className={classes.importButton}
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      alert('Customize Pricing');
+                      this.setState({
+                        dataPV: data2
+                      });
+                      this.hideButton(false);
+                      this.props.methodCustomizeTemplate(true);
+                      this.props.methodShowPricingTemplate(false);
+                      this.props.methodMoreOption(false);
+                    }}
+                  >
+                    Customize
+                  </Button>
+                  <br />
+                  <Button
+                    className={classes.importButton}
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
                       alert('Load Pricing');
                       this.setState({
                         dataPV: data2
                       });
                       this.hideButton(false);
                       this.props.methodShowPricingTemplate(true);
+                      this.props.methodCustomizeTemplate(false);
+                      this.props.methodMoreOption(false);
                     }}
                   >
                     Pricing
@@ -1058,7 +1231,7 @@ class CreateDetails extends React.Component {
             {/* {this.state.dataPV.map(function (ub) {
               return (
                 <div className={classes.root}> */}
-            {pricingV ? (
+            {/* {pricingV ? (
               <Box></Box>
             ) : (
               <Paper className={classes.paper}>
@@ -1177,7 +1350,131 @@ class CreateDetails extends React.Component {
                   </Button>
                 </Box>
               </Paper>
+            )} */}
+
+            {pricingV ? (
+              <Box></Box>
+            ) : (
+              <Paper className={classes.paper}>
+                <Grid container spacing={2}>
+                  <Grid item></Grid>
+                  <Grid item xs={12} md={12} sm container>
+                    <Grid
+                      item
+                      md={6}
+                      xs={6}
+                      container
+                      direction="column"
+                      spacing={2}
+                    >
+                      <Grid item>
+                        <Typography component="h5" variant="h5">
+                          {this.state.dataPV[0].ClientName}
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                          {this.state.dataPV[0].Type} {this.state.pvData}
+                          {this.state.dataPV[0].Status ? (
+                            <span style={{ color: '#FFC83D' }}>
+                              ({this.state.dataPV[0].Status})
+                            </span>
+                          ) : (
+                            ''
+                          )}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item md={6} xs={6}>
+                      {this.state.dataPV[0].PVAmt ? (
+                        <Typography
+                          component="h5"
+                          variant="h5"
+                          className={classes.rightPanel}
+                        >
+                          <span style={{ color: '#FFC83D' }}>PV </span>
+                          <span className={classes.right}>
+                            {this.state.dataPV[0].PVCurrency}{' '}
+                            {this.state.dataPV[0].PVAmt}
+                          </span>
+                        </Typography>
+                      ) : (
+                        ''
+                      )}
+                      <Typography
+                        variant="subtitle2"
+                        color="textSecondary"
+                        className={classes.right}
+                      >
+                        {this.state.dataPV[0].Date}
+                      </Typography>
+                      {this.state.dataPV[0].DeltaAmt ? (
+                        <Typography
+                          component="h5"
+                          variant="h5"
+                          className={classes.rightPanel}
+                        >
+                          <span style={{ color: '#FFC83D' }}>Delta </span>
+                          {this.state.dataPV[0].DeltaCurrency}{' '}
+                          {this.state.dataPV[0].DeltaAmt}
+                        </Typography>
+                      ) : (
+                        ''
+                      )}
+                      {this.state.dataPV[0].VegaAmt ? (
+                        <Typography
+                          component="h5"
+                          variant="h5"
+                          className={classes.rightPanel}
+                        >
+                          <span style={{ color: '#FFC83D' }}>Vega </span>
+                          {this.state.dataPV[0].VegaCurrency}{' '}
+                          {this.state.dataPV[0].VegaAmt}
+                        </Typography>
+                      ) : (
+                        ''
+                      )}
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Box display="flex" justifyContent="flex-end" p={2}>
+                  <Button
+                    className={classes.importButton}
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      alert('Trade Reviewing');
+                      this.setState({
+                        dataPV: data
+                      });
+                      this.hideButton(true);
+                      this.props.methodShowPricingTemplate(false);
+                      this.props.methodCreateTemplate(false);
+                      this.props.methodCustomizeTemplate(false);
+                    }}
+                  >
+                    Review
+                  </Button>
+                  <br />
+                  <Button
+                    className={classes.importButton}
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      alert('Trade has been sent to booking.');
+                      this.setState({
+                        dataPV: data
+                      });
+                      this.hideButton(true);
+                      this.props.methodShowPricingTemplate(false);
+                      this.props.methodCreateTemplate(false);
+                      this.props.methodCustomizeTemplate(false);
+                    }}
+                  >
+                    Book
+                  </Button>
+                </Box>
+              </Paper>
             )}
+
             {/* </div>
               );
             })} */}

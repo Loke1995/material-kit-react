@@ -37,11 +37,18 @@ import {
   Tooltip,
   makeStyles,
   Paper,
-  CardContent
+  CardContent,
+  Grid
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { DataGrid } from '@material-ui/data-grid';
 import MaterialTable from 'material-table';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+
+import CreateIcon from '@material-ui/icons/Create';
 
 const data3 = {
   'FXStructurePricingResponse::DELTA': -1588496.8722428496,
@@ -470,42 +477,103 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
 ];
 
-const PricingList = ({ className, ...rest }) => {
+const stripList = {
+  "FXStructurePricingRequest::BuildDate": 44050,
+  "FXStructurePricingRequest::InputRange": [
+      [ "Pricing Model", "Upper Strike", "Middle Strike", "Lower Strike", "Notional", "Leverage Factor", "Expiry Date", "Delivery Date" ],
+      [ "Black-Scholes", 4.280749999999999, 4.2757499999999995, 4.26575, 10000, 1.2, "03-Aug-20", "05-Aug-20" ],
+      [ "Black-Scholes", 4.280749999999999, 4.2757499999999995, 4.26575, 10000, 1.2, "01-Sep-20", "03-Sep-20" ],
+  ],
+  "FXStructurePricingRequest::InputRangeCommon": [
+      [ "Sales Folder Name", "MYFOP_TR1" ],
+      [ "Trading Folder Name", "MYFOP_TR9" ],
+      [ "Customer Name", "03ANSH" ],
+      [ "Base Ccy", "USD" ],
+      [ "Profit Currency", "Term" ],
+      [ "Term Ccy", "MYR" ],
+      [ "Client to Sell or Buy Base Ccy", "Buy" ],
+      [ "Sales BDBranchShortName", "TRG" ],
+      [ "Sales DGroupName", "INTERBANK" ],
+      [ "Sales DSubGrpDesc", "Interbank Transaction" ],
+      [ "Sales Comments", null ],
+      [ "Trading BDBranchShortName", "TRG" ],
+      [ "Trading DGroupName", "INTERBANK" ],
+      [ "Trading DSubGrpDesc", "Interbank Transaction" ],
+      [ "Trading Comments", null ],
+      [ "FxSpot", 4.2115 ],
+      [ "Value Date", 44050 ],
+      [ "BaseCcyUSDRate", 1 ],
+      [ "USDMYROpenRate", 1 ]
+  ],
+  "FXStructurePricingRequest::OutputRange": [
+      [ "Status", null ],
+      [ "PV", null ],
+      [ "Delta", null ],
+      [ "Vega", null ]
+  ],
+  "FXStructurePricingRequest::OverrideAbsoluteVol": [],
+  "FXStructurePricingRequest::OverrideFwdRates": [],
+  "FXStructurePricingRequest::OverridePts": [],
+  "FXStructurePricingRequest::OverrideVol": [],
+  "FXStructurePricingRequest::StructureName": "Anytime KO Fwd",
+  "GenericMapPricingOption::OptionMap": [],
+  "ObjectType": "FXStructurePricingRequest"
+};
+
+const StipeList = ({ className, ...rest }) => {
   const classes = useStyles();
   const [orders] = useState(data);
   // columnsTest();
-  var dataString = data3.['FXStructurePricingResponse::Headers'];
-  var dataRow = data3.['FXStructurePricingResponse::DealDetails'];
+  var dataString = stripList.['FXStructurePricingRequest::InputRange'];
+  // var pvData = data3.['FXStructurePricingResponse::PricingDetails'];
+  // test(pvData);
+  // this.props.methodPVData(pvData);
   const arr = [];
   const arrRow = [];
-  Object.keys(dataString).forEach(function (key) {
-    arr.push({'title':dataString[key], 'field':key});
+  Object.keys(dataString).forEach(function (key, index) {
+    
+    if (index === 0) {
+      dataString[key].forEach(function(key2, index) {
+        arr.push({'title':key2, 'field':index});
+      })
+    } else {
+      var test = {};
+      dataString[key].forEach(function(key2, index) {
+        test[index]=key2;
+      })
+      arrRow.push(test);
+    }
   });
-
-  Object.keys(dataRow).forEach(function (key) {
-    var test = {};
-    dataRow[key].forEach(function(key2, index) {
-// console.log(key2 + "|" + index);
-// test.concat(index:"'" & key2 & "'");
-      test[index]=key2;
-      // arrRow.push({'title':dataRow[key][key2], 'field':key2});
-      // arrRow.push({key2:"'" & dataRow[key][key2] & "'"});
-
-    })
-    arrRow.push(test);
-    // console.log(test);
-  });
-  // console.log(arrRow);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Deals Details"  style={{backgroundColor: 'gray', color: 'white',
-                height: '2.5rem'}}/>
+      <CardHeader
+      title={<h4 style={{ display:'inline-flex', alignItems: 'center',
+      height: '2.5rem' }}><CreateIcon style={{ paddingRight: '5px' }}/> Strip List</h4>} style={{backgroundColor: 'gray', color: 'white'}}/>
       <Divider />
       {/* <CardContent>
 </CardContent> */}
+
       <MaterialTable
-        title=""
+        title={<Grid container justify="space-between"><Grid item lg={6} sm={6} xl={6} xs={6}><Button
+          className={classes.importButton}
+          // color="primary"
+          // variant="contained"
+          onClick={() => {
+            alert('Add');
+          }}
+          endIcon={<AddIcon />}
+        >
+        </Button></Grid><Grid item lg={6} sm={6} xl={6} xs={6}><Button
+          className={classes.importButton}
+          // color="primary"
+          // variant="contained"
+          onClick={() => {
+            alert('Remove');
+          }}
+          endIcon={<DeleteIcon/>}
+        >
+        </Button></Grid></Grid>}
         columns={arr}
         data={arrRow}
         options={{
@@ -518,7 +586,6 @@ const PricingList = ({ className, ...rest }) => {
             textOverflow: 'ellipsis',
             paddingLeft: 5,
             paddingRight: 5,
-            
             fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
             fontWeight: '400',
             fontSize: '12px'
@@ -604,8 +671,8 @@ const PricingList = ({ className, ...rest }) => {
   // );
 };
 
-PricingList.propTypes = {
+StipeList.propTypes = {
   className: PropTypes.string
 };
 
-export default PricingList;
+export default StipeList;

@@ -9,7 +9,8 @@ import {
   Typography,
   Grid,
   TextField,
-  CardContent
+  CardContent,
+  Chip
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
@@ -40,8 +41,12 @@ const data = [
     TemplateCurrency: 'RM',
     TemplateAmount: 999999.35,
     TemplateDate: '3 Mar 3:05pm',
+
+    TemplateEnd: '3 April 3:05pm',
     TemplateCenter: 'KL',
     TemplateType: 'Vanilla',
+
+    TemplateFreq: 'Monthly',
     TemplatePair: 'USD/MYR',
     TemplateGen: 'Delivery Date',
     TemplateEvery: 'Monday',
@@ -54,8 +59,11 @@ const data = [
     TemplateCurrency: 'GBP',
     TemplateAmount: 168999,
     TemplateDate: '5 Mar 4:05pm',
+
+    TemplateEnd: '5 June 3:05pm',
     TemplateCenter: 'SG',
     TemplateType: 'Seagull',
+    TemplateFreq: 'Quarterly',
     TemplatePair: 'GBP/MYR',
     TemplateGen: 'Delivery Date',
     TemplateEvery: 'Tuesday',
@@ -68,8 +76,11 @@ const data = [
     TemplateCurrency: 'SGD',
     TemplateAmount: 388,
     TemplateDate: '6 Mar 5:05pm',
+
+    TemplateEnd: '5 Mar 3:05pm',
     TemplateCenter: 'KL',
     TemplateType: 'Collar',
+    TemplateFreq: 'Yearly',
     TemplatePair: 'SGD/MYR',
     TemplateGen: 'Expiry Date',
     TemplateEvery: 'Friday',
@@ -163,6 +174,7 @@ class TemplateList extends React.Component {
         <CardHeader
           // subheader="The information can be edited"
           title="Template Listing"
+          style={{ backgroundColor: 'gray', color: 'white', height: '2.5rem' }}
         />
         <Divider />
         {data.map((ub) => {
@@ -191,10 +203,10 @@ class TemplateList extends React.Component {
                           <Typography
                             color="textPrimary"
                             gutterBottom
-                            variant="h4"
+                            variant="h6"
                           >
                             <span
-                              style={{ color: '#FFC83D' }}
+                              // style={{ color: '#FFC83D' }}
                               onClick={() =>
                                 this.props.methodfromparent(
                                   ub.TemplateName,
@@ -207,13 +219,20 @@ class TemplateList extends React.Component {
                             {' for '}
                             {ub.TemplateName}
                           </Typography>
-                          <Typography
+
+                          <Chip
+                            color="primary"
+                            label={ub.TemplateStatus}
+                            size="small"
+                          />
+
+                          {/* <Typography
                             color="textSecondary"
                             gutterBottom
                             variant="h6"
                           >
                             {ub.TemplateStatus}
-                          </Typography>
+                          </Typography> */}
                         </Grid>
                         <Grid
                           item
@@ -226,13 +245,14 @@ class TemplateList extends React.Component {
                           <Typography
                             color="textPrimary"
                             gutterBottom
-                            variant="h4"
+                            variant="h6"
                           >
                             {ub.TemplateCurrency}{' '}
                             {ub.TemplateAmount.toLocaleString(undefined, {
                               maximumFractionDigits: 2
                             })}
                           </Typography>
+
                           <Typography
                             color="textSecondary"
                             gutterBottom
@@ -270,14 +290,118 @@ class TemplateList extends React.Component {
                           <Typography
                             color="textSecondary"
                             gutterBottom
-                            variant="h5"
+                            variant="h6"
+                          >
+                            Name:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h6"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateName}
+                          </Typography>
+                        </Grid>
+
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
+                        >
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            Center:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h6"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateCenter}
+                          </Typography>
+                        </Grid>
+
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
+                        >
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            Type:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h6"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateType}
+                          </Typography>
+                        </Grid>
+
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
+                        >
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            CcyPair:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h6"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplatePair}
+                          </Typography>
+                        </Grid>
+
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
+                        >
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
                           >
                             Generate:
                           </Typography>
                           <Typography
                             color="textPrimary"
                             gutterBottom
-                            variant="h5"
+                            variant="h6"
                             style={{ color: '#FFC83D' }}
                           >
                             {ub.TemplateGen}
@@ -296,19 +420,20 @@ class TemplateList extends React.Component {
                           <Typography
                             color="textSecondary"
                             gutterBottom
-                            variant="h5"
+                            variant="h6"
                           >
-                            CcyPair:
+                            Frequency:
                           </Typography>
                           <Typography
                             color="textPrimary"
                             gutterBottom
-                            variant="h5"
+                            variant="h6"
                             style={{ color: '#FFC83D' }}
                           >
-                            {ub.TemplatePair}
+                            {ub.TemplateFreq}
                           </Typography>
                         </Grid>
+
                         <Grid
                           lg={6}
                           sm={6}
@@ -321,17 +446,17 @@ class TemplateList extends React.Component {
                           <Typography
                             color="textSecondary"
                             gutterBottom
-                            variant="h5"
+                            variant="h6"
                           >
-                            Center:
+                            Every:
                           </Typography>
                           <Typography
                             color="textPrimary"
                             gutterBottom
-                            variant="h5"
+                            variant="h6"
                             style={{ color: '#FFC83D' }}
                           >
-                            {ub.TemplateCenter}
+                            {ub.TemplateEvery}
                           </Typography>
                         </Grid>
 
@@ -360,31 +485,6 @@ class TemplateList extends React.Component {
                             {ub.TemplateRollConvention}
                           </Typography>
                         </Grid>
-                        <Grid
-                          lg={6}
-                          sm={6}
-                          xl={6}
-                          xs={12}
-                          container
-                          justify="space-between"
-                          style={{ padding: '0.5rem' }}
-                        >
-                          <Typography
-                            color="textSecondary"
-                            gutterBottom
-                            variant="h5"
-                          >
-                            Every:
-                          </Typography>
-                          <Typography
-                            color="textPrimary"
-                            gutterBottom
-                            variant="h5"
-                            style={{ color: '#FFC83D' }}
-                          >
-                            {ub.TemplateEvery}
-                          </Typography>
-                        </Grid>
 
                         <Grid
                           lg={6}
@@ -409,6 +509,58 @@ class TemplateList extends React.Component {
                             style={{ color: '#FFC83D' }}
                           >
                             {ub.TemplateOccurance}
+                          </Typography>
+                        </Grid>
+
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
+                        >
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            Start:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h6"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateDate}
+                          </Typography>
+                        </Grid>
+
+                        <Grid
+                          lg={6}
+                          sm={6}
+                          xl={6}
+                          xs={12}
+                          container
+                          justify="space-between"
+                          style={{ padding: '0.5rem' }}
+                        >
+                          <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h6"
+                          >
+                            End:
+                          </Typography>
+                          <Typography
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h6"
+                            style={{ color: '#FFC83D' }}
+                          >
+                            {ub.TemplateEnd}
                           </Typography>
                         </Grid>
                       </Grid>

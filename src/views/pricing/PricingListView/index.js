@@ -5,7 +5,8 @@ import Template from './Template';
 import TemplateList from './TemplateList';
 import FXSpot from './FXSpotList';
 
-import PricingList from './PricingList';
+import StripList from './StripList';
+import DealDetails from './PricingList';
 import PropTypes from 'prop-types';
 import CustomizePricing from './CustomizePricing';
 
@@ -23,10 +24,18 @@ class PricingListView extends React.Component {
     super(props);
     this.parentmethod = this.parentmethod.bind(this);
     this.pricingCall = this.pricingCall.bind(this);
+    this.moreOptionStrip = this.moreOptionStrip.bind(this);
+    this.createTemplateMethod = this.createTemplateMethod.bind(this);
+    this.pvDataMethod = this.pvDataMethod.bind(this);
+    this.customizeMethod = this.customizeMethod.bind(this);
     this.state = {
       templateName: '',
       templateType: '',
-      pricingShow: false
+      pricingShow: false,
+      pvData: '',
+      moreOptionStrip: false,
+      createTemplate: false,
+      customizeTemplate: false
     };
   }
   //here 'data' represents the data recieved from the child when this method gets called inside the child
@@ -43,10 +52,37 @@ class PricingListView extends React.Component {
     });
   }
 
+  pvDataMethod(data) {
+    this.setState({
+      pvData: data
+    });
+  }
+
+  moreOptionStrip(show) {
+    this.setState({
+      moreOptionStrip: show
+    });
+  }
+
+  createTemplateMethod(data) {
+    this.setState({
+      createTemplate: data
+    });
+  }
+
+  customizeMethod(data) {
+    this.setState({
+      customizeTemplate: data
+    });
+  }
+
   render() {
     return (
-      <Page title="Customers">
+      <Page title="Pricing">
         <Container maxWidth={false}>
+          <Grid item lg={12} sm={12} xl={12} xs={12}>
+            <br />
+          </Grid>
           {/* <Grid container spacing={2}>
         <Grid item lg={6} sm={6} xl={6} xs={12}>
           <BucketList />
@@ -55,13 +91,17 @@ class PricingListView extends React.Component {
         </Grid>
       </Grid> */}
           {/* <h1>{this.state.templateType}</h1> */}
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             <Grid item lg={6} sm={6} xl={6} xs={12}>
               {/* {this.state.templateListLoadID === '1' ? ( */}
               <Template
                 templateName={this.state.templateName}
                 templateType={this.state.templateType}
+                pvData={this.state.pvData}
                 methodShowPricing={this.pricingCall}
+                methodMoreOptionStrip={this.moreOptionStrip}
+                methodCreateTemplate={this.createTemplateMethod}
+                methodCustomizeTemplate={this.customizeMethod}
                 // templateData={
                 //   (this.state.templateName, this.state.templateType)
                 // }
@@ -84,7 +124,7 @@ class PricingListView extends React.Component {
             </Grid>
           </Grid> */}
 
-          {this.state.pricingShow ? (
+          {this.state.customizeTemplate ? (
             <Grid container spacing={2}>
               <Grid item lg={12} sm={12} xl={12} xs={12}>
                 <CustomizePricing />
@@ -92,11 +132,21 @@ class PricingListView extends React.Component {
             </Grid>
           ) : null}
 
-          <Grid container spacing={2}>
-            <Grid item lg={12} sm={12} xl={12} xs={12}>
-              <PricingList />
+          {this.state.moreOptionStrip && this.state.createTemplate ? (
+            <Grid container spacing={2}>
+              <Grid item lg={12} sm={12} xl={12} xs={12}>
+                <StripList />
+              </Grid>
             </Grid>
-          </Grid>
+          ) : null}
+
+          {this.state.pricingShow ? (
+            <Grid container spacing={2}>
+              <Grid item lg={12} sm={12} xl={12} xs={12}>
+                <DealDetails />
+              </Grid>
+            </Grid>
+          ) : null}
 
           {/* <Grid container spacing={2}>
         <Grid item lg={12} md={12} xl={12} xs={12}>

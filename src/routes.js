@@ -84,6 +84,7 @@ class routes extends React.Component {
           <Route path="404" element={<Navigate to="/404" />} />
           <Route path="profile" element={<ProfileView />} />
         </Route>
+        {/* {currentUser? console.log('yes') : console.log('no')} */}
         {currentUser ? (
           <Route path="app" element={<DashboardLayout />}>
             <Route path="/" element={<DashboardView />} />

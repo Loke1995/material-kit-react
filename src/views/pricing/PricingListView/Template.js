@@ -19,6 +19,7 @@ import {
 import { Search as SearchIcon } from 'react-feather';
 import CreateDetails from './CreateDetails';
 import { boolean } from 'yup';
+import CreateIcon from '@material-ui/icons/Create';
 
 const styles = (theme) => ({
   root: {},
@@ -27,6 +28,9 @@ const styles = (theme) => ({
   },
   exportButton: {
     marginRight: theme.spacing(1)
+  },
+  resize: {
+    fontSize: 12
   }
 });
 
@@ -112,18 +116,21 @@ class Template extends React.Component {
     this.createTemplate = this.createTemplate.bind(this);
     this.moreOptions = this.moreOptions.bind(this);
     this.pricingCallTemplate = this.pricingCallTemplate.bind(this);
+    this.customizeMethod = this.customizeMethod.bind(this);
   }
 
   moreOptions(show) {
     this.setState({
       moreOption: show
     });
+    this.props.methodMoreOptionStrip(show);
   }
 
   createTemplate(show) {
     this.setState({
       createTemplate: show
     });
+    this.props.methodCreateTemplate(show);
   }
 
   onDropdownSelected2(e) {
@@ -149,6 +156,13 @@ class Template extends React.Component {
     });
   }
 
+  customizeMethod(show) {
+    this.setState({
+      customizeMethod: show
+    });
+    this.props.methodCustomizeTemplate(show);
+  }
+
   render() {
     const { classes } = this.props;
     const { createTemplate, moreOption } = this.state;
@@ -157,8 +171,11 @@ class Template extends React.Component {
       <CreateDetails
         templateName={this.props.templateName}
         templateType={this.props.templateType}
+        pvData={this.props.pvData}
         methodShowPricingTemplate={this.pricingCallTemplate}
         methodCreateTemplate={this.createTemplate}
+        methodCustomizeTemplate={this.customizeMethod}
+        methodMoreOption={this.moreOptions}
       />
     ) : (
       <div className={classes.root}>
@@ -166,7 +183,17 @@ class Template extends React.Component {
           <Card>
             <CardHeader
               // subheader="The information can be edited"
-              title="Pricing Details"
+              // title="Pricing Details"
+              title={
+                <h4 style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  <CreateIcon style={{ paddingRight: '5px' }} /> Pricing Details
+                </h4>
+              }
+              style={{
+                backgroundColor: 'gray',
+                color: 'white',
+                height: '2.5rem'
+              }}
             />
             <Divider />
             <CardContent>
@@ -185,6 +212,11 @@ class Template extends React.Component {
                           // placeholder={this.state.templateName}
                           placeholder={classes.templateName}
                           InputLabelProps={{ shrink: true }}
+                          InputProps={{
+                            classes: {
+                              input: classes.resize
+                            }
+                          }}
                         />
                       </Grid>
                     );
@@ -205,6 +237,11 @@ class Template extends React.Component {
                           variant="outlined"
                           // onChange={this.onDropdownSelected}
                           onChange={console.log('changed')}
+                          InputProps={{
+                            classes: {
+                              input: classes.resize
+                            }
+                          }}
                         >
                           {dropdownlist.map((option) => (
                             <option key={option} value={option}>
@@ -226,6 +263,11 @@ class Template extends React.Component {
                           variant="outlined"
                           type="date"
                           InputLabelProps={{ shrink: true }}
+                          InputProps={{
+                            classes: {
+                              input: classes.resize
+                            }
+                          }}
                         />
                       </Grid>
                     );
@@ -265,6 +307,11 @@ class Template extends React.Component {
                             variant="outlined"
                             type="date"
                             InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              classes: {
+                                input: classes.resize
+                              }
+                            }}
                             // defaultValue={option[1]}
                           />
                         </Grid>
@@ -280,6 +327,11 @@ class Template extends React.Component {
                             key={option[1]}
                             placeholder={option[1]}
                             InputLabelProps={{ shrink: true }}
+                            InputProps={{
+                              classes: {
+                                input: classes.resize
+                              }
+                            }}
                           />
                         </Grid>
                       );
@@ -320,6 +372,11 @@ class Template extends React.Component {
                             SelectProps={{ native: true }}
                             key={dropdownlist[0]}
                             variant="outlined"
+                            InputProps={{
+                              classes: {
+                                input: classes.resize
+                              }
+                            }}
                           >
                             {dropdownlist.map((option) => (
                               <option key={option} value={option}>

@@ -221,7 +221,10 @@ const LatestOrders = ({ className, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Trade Listing" />
+      <CardHeader
+        title="Trade Listing"
+        style={{ backgroundColor: 'gray', color: 'white', height: '2.5rem' }}
+      />
       <Divider />
 
       <div style={{ backgroundColor: 'red' }}>
@@ -240,8 +243,9 @@ const LatestOrders = ({ className, ...rest }) => {
               textOverflow: 'ellipsis',
               paddingLeft: 5,
               paddingRight: 5,
-              fontWeight: 'bold',
-              backgroundColor: '#EEE'
+              fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+              fontWeight: '400',
+              fontSize: '12px'
             }
           }}
           icons={tableIcons}

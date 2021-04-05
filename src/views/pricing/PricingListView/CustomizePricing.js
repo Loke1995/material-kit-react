@@ -22,9 +22,12 @@ import {
   Card,
   CardHeader,
   Divider,
-  makeStyles
+  makeStyles,
+  Box,
+  Button
 } from '@material-ui/core';
 import MaterialTable from 'material-table';
+import CreateIcon from '@material-ui/icons/Create';
 
 const data3 = {
   "FXStructurePricingResponse::CustomizeDetails": [
@@ -75,10 +78,14 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+
 const CustomizePricing = ({ className, ...rest }) => {
   const classes = useStyles();
   // columnsTest();
   var dataString = data3.['FXStructurePricingResponse::CustomizeDetails'];
+  var pvData = data3.['FXStructurePricingResponse::PricingDetails'];
+  console.log(pvData);
+  // () => this.props.methodPVData(pvData);
   const arr = [];
   const arrRow = [];
   Object.keys(dataString).forEach(function (key, index) {
@@ -99,7 +106,15 @@ const CustomizePricing = ({ className, ...rest }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Customize Pricing Output" />
+      <CardHeader 
+      title={
+        <h4 style={{ display: 'inline-flex', alignItems: 'center' }}>
+          <CreateIcon style={{ paddingRight: '5px' }} /> Customize Details
+        </h4>
+      }
+      // title="Customize Details"
+       style={{backgroundColor: 'gray', color: 'white',
+       height: '2.5rem'}}/>
       <Divider />
       <MaterialTable
         title=""
@@ -115,11 +130,34 @@ const CustomizePricing = ({ className, ...rest }) => {
             textOverflow: 'ellipsis',
             paddingLeft: 5,
             paddingRight: 5,
-            fontWeight: 'bold'
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+            fontWeight: '400',
+            fontSize: '12px'
+            
+            // fontWeight: 'bold'
           }
         }}
         icons={tableIcons}
       />
+
+<Box display="flex" justifyContent="flex-end" p={2}>
+                  <Button
+                    className={classes.importButton}
+                    color="primary"
+                    variant="contained"
+                    onClick={() => {
+                      alert('Customize Pricing');
+                      // this.setState({
+                      //   dataPV: data2
+                      // });
+                      this.hideButton(false);
+                      this.props.methodShowPricingTemplate(true);
+                    }}
+                  >
+                    Save
+                  </Button>
+                  
+                </Box>
 
     </Card>
   );
