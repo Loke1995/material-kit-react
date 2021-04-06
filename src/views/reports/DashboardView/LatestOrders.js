@@ -31,7 +31,7 @@ const data = [
       name: 'Ekaterina Tankova'
     },
     createdAt: 1555016400000,
-    status: 'pending'
+    status: 'Acknowledged'
   },
   {
     id: uuid(),
@@ -41,7 +41,7 @@ const data = [
       name: 'Cao Yu'
     },
     createdAt: 1555016400000,
-    status: 'delivered'
+    status: 'Success'
   },
   {
     id: uuid(),
@@ -51,7 +51,7 @@ const data = [
       name: 'Alexa Richardson'
     },
     createdAt: 1554930000000,
-    status: 'refunded'
+    status: 'Pending Resubmittion'
   },
   {
     id: uuid(),
@@ -61,7 +61,7 @@ const data = [
       name: 'Anje Keizer'
     },
     createdAt: 1554757200000,
-    status: 'pending'
+    status: 'Pending Repricing'
   },
   {
     id: uuid(),
@@ -71,7 +71,7 @@ const data = [
       name: 'Clarke Gillebert'
     },
     createdAt: 1554670800000,
-    status: 'delivered'
+    status: 'Fail'
   },
   {
     id: uuid(),
@@ -81,7 +81,7 @@ const data = [
       name: 'Adam Denisov'
     },
     createdAt: 1554670800000,
-    status: 'delivered'
+    status: 'Pending'
   }
 ];
 
@@ -101,11 +101,13 @@ const LatestOrders = ({ className, ...rest }) => {
       <CardHeader title="Latest Deals" />
       <Divider />
       <PerfectScrollbar>
-        <Box minWidth={800}>
+        <Box
+        // minWidth={800}
+        >
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Order Ref</TableCell>
+                <TableCell>K+ ID</TableCell>
                 <TableCell>Customer</TableCell>
                 <TableCell sortDirection="desc">
                   <Tooltip enterDelay={300} title="Sort">
@@ -126,7 +128,25 @@ const LatestOrders = ({ className, ...rest }) => {
                     {moment(order.createdAt).format('DD/MM/YYYY')}
                   </TableCell>
                   <TableCell>
-                    <Chip color="primary" label={order.status} size="small" />
+                    <Chip
+                      color="primary"
+                      label={order.status}
+                      size="small"
+                      style={{
+                        backgroundColor:
+                          order.status.toLowerCase().indexOf('pending') >= 0
+                            ? ''
+                            : order.status.toLowerCase().indexOf('success') >= 0
+                            ? 'lightgreen'
+                            : order.status
+                                .toLowerCase()
+                                .indexOf('acknowledge') >= 0
+                            ? 'gray'
+                            : order.status.toLowerCase().indexOf('fail') >= 0
+                            ? 'lightred'
+                            : 'blue'
+                      }}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
@@ -134,7 +154,7 @@ const LatestOrders = ({ className, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <Box display="flex" justifyContent="flex-end" p={2}>
+      {/* <Box display="flex" justifyContent="flex-end" p={2}>
         <Button
           color="primary"
           endIcon={<ArrowRightIcon />}
@@ -143,7 +163,7 @@ const LatestOrders = ({ className, ...rest }) => {
         >
           View all
         </Button>
-      </Box>
+      </Box> */}
     </Card>
   );
 };

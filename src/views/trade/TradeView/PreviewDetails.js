@@ -562,7 +562,8 @@ class PreviewDetails extends React.Component {
                   <Button
                     className={classes.importButton}
                     variant="contained"
-                    style={{ backgroundColor: green[500] }}
+                    color="primary"
+                    // style={{ backgroundColor: green[500] }}
                     onClick={(e) => {
                       this.alertMsg('Accepted');
                     }}
@@ -573,7 +574,7 @@ class PreviewDetails extends React.Component {
                   <Button
                     className={classes.importButton}
                     variant="contained"
-                    style={{ backgroundColor: red[500] }}
+                    // style={{ backgroundColor: red[500] }}
                     onClick={(e) => {
                       this.alertMsg('Rejected');
                     }}

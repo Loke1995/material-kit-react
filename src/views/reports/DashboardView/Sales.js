@@ -108,11 +108,11 @@ const Sales = ({ className, ...rest }) => {
       <Divider />
       <CardContent>
         <Box height={400} position="relative">
-          <HorizontalBar data={data} options={options} />
+          <Bar data={data} options={options} />
         </Box>
       </CardContent>
       <Divider />
-      <Box display="flex" justifyContent="flex-end" p={2}>
+      {/* <Box display="flex" justifyContent="flex-end" p={2}>
         <Button
           color="primary"
           endIcon={<ArrowRightIcon />}
@@ -121,7 +121,7 @@ const Sales = ({ className, ...rest }) => {
         >
           Overview
         </Button>
-      </Box>
+      </Box> */}
     </Card>
   );
 };
