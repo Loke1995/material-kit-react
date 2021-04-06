@@ -548,7 +548,8 @@ const StipeList = ({ className, ...rest }) => {
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader
       title={<h4 style={{ display:'inline-flex', alignItems: 'center',
-      height: '2.5rem' }}><AddCircleOutlineIcon style={{ paddingRight: '5px' }}/> Strip List</h4>} style={{backgroundColor: 'gray', color: 'white'}}/>
+      height: '2.5rem' }}><AddCircleOutlineIcon style={{ paddingRight: '5px' }}/> Strip List</h4>} style={{backgroundColor: 'gray', color: 'white',
+                height: '2.5rem'}}/>
       <Divider />
       {/* <CardContent>
 </CardContent> */}

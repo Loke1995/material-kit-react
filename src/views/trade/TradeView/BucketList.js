@@ -221,6 +221,10 @@ const styles = (theme) => ({
   },
   secondaryTail: {
     backgroundColor: theme.palette.secondary.main
+  },
+  //style for font size
+  resize: {
+    fontSize: 12
   }
 });
 
@@ -473,6 +477,11 @@ class BucketList extends React.Component {
                                 key={item.BaseCcy}
                                 SelectProps={{ native: true }}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               >
                                 <option key={item.BaseCcy} value={item.BaseCcy}>
                                   {item.BaseCcy}
@@ -496,6 +505,11 @@ class BucketList extends React.Component {
                                 key={item.ProfitCurrency}
                                 SelectProps={{ native: true }}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               >
                                 <option
                                   key={item.ProfitCurrency}
@@ -522,6 +536,11 @@ class BucketList extends React.Component {
                                 key={item.TermCcy}
                                 SelectProps={{ native: true }}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               >
                                 <option key={item.TermCcy} value={item.TermCcy}>
                                   {item.TermCcy}
@@ -545,6 +564,11 @@ class BucketList extends React.Component {
                                 key={item.TransactionBaseCcy}
                                 SelectProps={{ native: true }}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               >
                                 <option
                                   key={item.TransactionBaseCcy}
@@ -570,6 +594,11 @@ class BucketList extends React.Component {
                                 key={item.SalesBDSN}
                                 value={item.SalesBDSN}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               />
                             </Grid>
 
@@ -583,6 +612,11 @@ class BucketList extends React.Component {
                                 key={item.SalesDGN}
                                 value={item.SalesDGN}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               />
                             </Grid>
 
@@ -596,6 +630,11 @@ class BucketList extends React.Component {
                                 key={item.SalesDSGD}
                                 value={item.SalesDSGD}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               />
                             </Grid>
 
@@ -609,6 +648,11 @@ class BucketList extends React.Component {
                                 key={item.SalesComment}
                                 value={item.SalesComment}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               />
                             </Grid>
 
@@ -622,6 +666,11 @@ class BucketList extends React.Component {
                                 key={item.TradingBDBSN}
                                 value={item.TradingBDBSN}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               />
                             </Grid>
 
@@ -635,6 +684,11 @@ class BucketList extends React.Component {
                                 key={item.TradingDGN}
                                 value={item.TradingDGN}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               />
                             </Grid>
 
@@ -648,6 +702,11 @@ class BucketList extends React.Component {
                                 key={item.TradingDSGD}
                                 value={item.TradingDSGD}
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               />
                             </Grid>
 
@@ -661,6 +720,11 @@ class BucketList extends React.Component {
                                 variant="outlined"
                                 placeholder="Place comments here"
                                 InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                  classes: {
+                                    input: classes.resize
+                                  }
+                                }}
                               />
                             </Grid>
                           </Grid>
@@ -841,7 +905,7 @@ const BucketList4 = ({ className, ...rest }) => {
                               xs={6}
                               container
                               direction="column"
-                              spacing={2}
+                              spacing={1}
                             >
                               <Grid item>
                                 <Typography component="h3" variant="h3">
